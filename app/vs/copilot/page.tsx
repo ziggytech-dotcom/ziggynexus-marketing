@@ -1,332 +1,286 @@
-import type { Metadata } from "next";
-import Link from "next/link";
+import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "ZiggyNexus vs Copilot — Save $360/yr on your client portal",
+  title: "ZiggyNexus vs Copilot — 89% cheaper for a team | ZiggyNexus",
   description:
-    "ZiggyNexus vs Copilot: Full feature comparison. ZiggyNexus offers unlimited portals, an onboarding wizard, and no per-seat fees — at $39/mo vs Copilot's $69/mo.",
-};
+    "Copilot charges $69/mo per seat. A 5-person team pays $345/mo. ZiggyNexus gives you 5 seats at $39/mo — same client portal experience, a fraction of the cost.",
+}
 
-const comparisonRows = [
-  {
-    feature: "Monthly price",
-    ziggynexus: "$39/mo",
-    copilot: "$69/mo",
-    winner: "ziggynexus",
-    note: "ZiggyNexus saves you $360/year",
-  },
-  {
-    feature: "Annual price",
-    ziggynexus: "$390/yr",
-    copilot: "$828/yr",
-    winner: "ziggynexus",
-    note: "Identical features, $438 cheaper annually",
-  },
-  {
-    feature: "Branded client portals",
-    ziggynexus: "Yes",
-    copilot: "Yes",
-    winner: "tie",
-    note: "Both offer white-label portals",
-  },
-  {
-    feature: "Unlimited client portals",
-    ziggynexus: "Yes — unlimited",
-    copilot: "No — limited by plan",
-    winner: "ziggynexus",
-    note: "Copilot caps portals on lower tiers",
-  },
-  {
-    feature: "Custom domain",
-    ziggynexus: "Yes",
-    copilot: "Yes",
-    winner: "tie",
-    note: "Both support custom domains",
-  },
-  {
-    feature: "Online invoicing",
-    ziggynexus: "Yes",
-    copilot: "Yes",
-    winner: "tie",
-    note: "",
-  },
-  {
-    feature: "E-sign contracts",
-    ziggynexus: "Yes",
-    copilot: "Yes",
-    winner: "tie",
-    note: "",
-  },
-  {
-    feature: "Secure file sharing",
-    ziggynexus: "Yes",
-    copilot: "Yes",
-    winner: "tie",
-    note: "",
-  },
-  {
-    feature: "Client messaging",
-    ziggynexus: "Yes",
-    copilot: "Yes",
-    winner: "tie",
-    note: "",
-  },
-  {
-    feature: "Onboarding wizard",
-    ziggynexus: "Yes — full wizard builder",
-    copilot: "No",
-    winner: "ziggynexus",
-    note: "ZiggyNexus includes a powerful client onboarding flow builder",
-  },
-  {
-    feature: "Per-seat fees",
-    ziggynexus: "None",
-    copilot: "Yes on team plans",
-    winner: "ziggynexus",
-    note: "ZiggyNexus covers your whole team, no per-seat charges",
-  },
-  {
-    feature: "Priority support",
-    ziggynexus: "Yes",
-    copilot: "Paid add-on",
-    winner: "ziggynexus",
-    note: "Included in ZiggyNexus base plan",
-  },
-  {
-    feature: "API access",
-    ziggynexus: "Yes",
-    copilot: "Yes",
-    winner: "tie",
-    note: "",
-  },
-  {
-    feature: "Setup time",
-    ziggynexus: "< 5 minutes",
-    copilot: "~30 minutes",
-    winner: "ziggynexus",
-    note: "Simpler setup process",
-  },
-];
+const ACCENT = "#0ea5e9"
+const ACCENT_BG = "rgba(14,165,233,0.1)"
+const ACCENT_BORDER = "rgba(14,165,233,0.25)"
 
-export default function VsCopilotPage() {
-  const ziggyWins = comparisonRows.filter((r) => r.winner === "ziggynexus").length;
-  const copilotWins = comparisonRows.filter((r) => r.winner === "copilot").length;
-
+export default function VsCopilot() {
   return (
-    <div className="bg-[#0f0a0a]">
-      {/* Hero */}
-      <section className="py-24 relative overflow-hidden">
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-0 left-1/3 w-[400px] h-[400px] rounded-full bg-emerald-500/5 blur-3xl" />
+    <>
+      <style>{`@media(max-width:768px){.nav-links{display:none}}`}</style>
+
+      {/* ── NAV ── */}
+      <nav style={{
+        position: "sticky",
+        top: 0,
+        zIndex: 100,
+        background: "rgba(10,10,10,0.92)",
+        backdropFilter: "blur(12px)",
+        borderBottom: "1px solid #1f1f1f",
+        padding: "0 24px",
+      }}>
+        <div style={{
+          maxWidth: 1120,
+          margin: "0 auto",
+          height: 64,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}>
+          <a href="/" style={{ fontSize: 22, fontWeight: 700, color: "#fff", letterSpacing: "-0.5px" }}>
+            Ziggy<span style={{ color: ACCENT }}>Nexus</span>
+          </a>
+          <div className="nav-links" style={{ display: "flex", gap: 28 }}>
+            {[["Features", "/#features"], ["Pricing", "/#pricing"], ["Sign In", "https://app.ziggynexus.com/login"]].map(([l, h]) => (
+              <a key={l} href={h} style={{ color: "#888", fontSize: 15, fontWeight: 500 }}>{l}</a>
+            ))}
+          </div>
+          <a href="https://app.ziggynexus.com/signup" style={{
+            background: ACCENT, color: "#fff", padding: "9px 20px",
+            borderRadius: 8, fontSize: 14, fontWeight: 600,
+          }}>
+            Start Free Trial
+          </a>
         </div>
-        <div className="max-w-6xl mx-auto px-6 relative">
-          <div className="text-center">
-            <div className="inline-flex items-center gap-2 bg-[#18181b] border border-[#27272a] rounded-full px-4 py-1.5 text-sm text-zinc-400 mb-8">
-              Comparison
-            </div>
-            <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-6">
-              <span style={{ color: "#ff1744" }}>Ziggy</span>
-              <span className="text-white">Nexus</span>
-              <span className="text-zinc-500"> vs </span>
-              <span className="text-zinc-400">Copilot</span>
-            </h1>
-            <p className="text-xl text-zinc-400 max-w-2xl mx-auto mb-10">
-              Same client portal features. Better onboarding tools. $30/mo
-              cheaper. Here&apos;s the full breakdown.
-            </p>
+      </nav>
 
-            {/* Score cards */}
-            <div className="flex flex-col sm:flex-row justify-center gap-4 mb-10">
-              <div className="bg-[#18181b] border border-emerald-500/40 rounded-2xl px-8 py-5 text-center">
-                <div className="text-3xl font-bold text-emerald-500">{ziggyWins}</div>
-                <div className="text-sm text-zinc-400 mt-1">Categories won by ZiggyNexus</div>
-              </div>
-              <div className="bg-[#18181b] border border-[#27272a] rounded-2xl px-8 py-5 text-center">
-                <div className="text-3xl font-bold text-zinc-500">{copilotWins}</div>
-                <div className="text-sm text-zinc-400 mt-1">Categories won by Copilot</div>
-              </div>
-            </div>
+      {/* ── HERO ── */}
+      <section style={{ padding: "80px 24px 60px", textAlign: "center", maxWidth: 820, margin: "0 auto" }}>
+        <div style={{
+          display: "inline-block",
+          background: ACCENT_BG,
+          border: `1px solid ${ACCENT_BORDER}`,
+          borderRadius: 99,
+          padding: "6px 16px",
+          fontSize: 13,
+          color: ACCENT,
+          fontWeight: 600,
+          marginBottom: 24,
+          letterSpacing: "0.02em",
+        }}>
+          ZiggyNexus vs Copilot
+        </div>
 
-            <a
-              href="https://app.ziggynexus.com/signup"
-              className="bg-emerald-500 hover:bg-emerald-400 text-black font-semibold px-8 py-4 rounded-xl text-base transition-colors inline-flex items-center gap-2"
-            >
-              Switch to ZiggyNexus — $39/mo
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-              </svg>
-            </a>
+        <h1 style={{
+          fontSize: "clamp(38px, 5vw, 60px)",
+          fontWeight: 700,
+          lineHeight: 1.1,
+          letterSpacing: "-1.5px",
+          marginBottom: 24,
+          color: "#fff",
+        }}>
+          Copilot charges $69/mo per seat.<br />
+          <span style={{
+            background: `linear-gradient(135deg, #fff 0%, ${ACCENT} 100%)`,
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            backgroundClip: "text",
+          }}>We include 5 seats for $39.</span>
+        </h1>
+
+        <p style={{ fontSize: 18, color: "#888", lineHeight: 1.6, marginBottom: 36, maxWidth: 600, margin: "0 auto 36px" }}>
+          A 5-person agency on Copilot pays $345/mo. On ZiggyNexus, that same team pays $39/mo — and gets the same client portal experience. That's <strong style={{ color: "#fff" }}>$3,672 saved per year.</strong>
+        </p>
+
+        <div style={{ display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}>
+          <a href="https://app.ziggynexus.com/signup" style={{
+            background: ACCENT, color: "#fff", padding: "15px 30px",
+            borderRadius: 10, fontSize: 16, fontWeight: 600,
+          }}>
+            Start Free Trial — $39/mo
+          </a>
+          <a href="/#pricing" style={{
+            background: "transparent", color: "#fff", padding: "15px 30px",
+            borderRadius: 10, fontSize: 16, fontWeight: 600,
+            border: "1px solid #333",
+          }}>
+            See Full Pricing
+          </a>
+        </div>
+      </section>
+
+      {/* ── COST COMPARISON CALLOUT ── */}
+      <section style={{ padding: "0 24px 80px", maxWidth: 800, margin: "0 auto" }}>
+        <div style={{
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr",
+          gap: 16,
+        }}>
+          <div style={{
+            background: "#111111",
+            border: `2px solid ${ACCENT}`,
+            borderRadius: 16,
+            padding: "32px 28px",
+            textAlign: "center",
+          }}>
+            <div style={{ fontSize: 13, fontWeight: 700, color: ACCENT, textTransform: "uppercase" as const, letterSpacing: "0.1em", marginBottom: 12 }}>
+              ZiggyNexus
+            </div>
+            <div style={{ fontSize: 48, fontWeight: 700, color: "#fff", letterSpacing: "-1px", marginBottom: 4 }}>$39</div>
+            <div style={{ color: "#555", fontSize: 14, marginBottom: 16 }}>/mo · 5 seats included</div>
+            <ul style={{ listStyle: "none", padding: 0, textAlign: "left" }}>
+              {[
+                "✓ Unlimited client portals",
+                "✓ White-label + custom domain",
+                "✓ File sharing, messaging, e-sign",
+                "✓ Invoicing via Stripe",
+                "✓ Intake forms + knowledge base",
+                "✓ 5 seats, no per-seat fee",
+              ].map(item => (
+                <li key={item} style={{ padding: "5px 0", fontSize: 14, color: "#ccc", display: "flex", gap: 8 }}>
+                  <span style={{ color: ACCENT, flexShrink: 0 }}>{item.slice(0, 1)}</span>
+                  {item.slice(1)}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div style={{
+            background: "#0d0d0d",
+            border: "1px solid #222",
+            borderRadius: 16,
+            padding: "32px 28px",
+            textAlign: "center",
+            opacity: 0.8,
+          }}>
+            <div style={{ fontSize: 13, fontWeight: 700, color: "#555", textTransform: "uppercase" as const, letterSpacing: "0.1em", marginBottom: 12 }}>
+              Copilot
+            </div>
+            <div style={{ fontSize: 48, fontWeight: 700, color: "#555", letterSpacing: "-1px", marginBottom: 4 }}>$69</div>
+            <div style={{ color: "#444", fontSize: 14, marginBottom: 16 }}>/mo · per seat</div>
+            <ul style={{ listStyle: "none", padding: 0, textAlign: "left" }}>
+              {[
+                "✓ Client portals",
+                "✓ White-label",
+                "✓ File sharing, messaging, e-sign",
+                "✓ Invoicing",
+                "✓ Intake forms",
+                "✗ $69 × 5 seats = $345/mo",
+              ].map(item => (
+                <li key={item} style={{ padding: "5px 0", fontSize: 14, color: item.startsWith("✗") ? "#c0392b" : "#555", display: "flex", gap: 8 }}>
+                  {item}
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </section>
 
-      {/* Savings callout */}
-      <section className="pb-12">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-2xl p-8 text-center">
-            <div className="text-4xl font-bold text-emerald-500 mb-2">Save $360/year</div>
-            <p className="text-zinc-300 text-lg">
-              ZiggyNexus at $39/mo vs Copilot at $69/mo — same core features,
-              $30 less per month, unlimited portals, and an onboarding wizard
-              that Copilot doesn&apos;t offer.
-            </p>
-          </div>
-        </div>
-      </section>
+      {/* ── DETAILED COMPARISON TABLE ── */}
+      <section style={{
+        padding: "0 24px 96px",
+        maxWidth: 900,
+        margin: "0 auto",
+      }}>
+        <h2 style={{ fontSize: "clamp(26px, 3vw, 36px)", fontWeight: 700, letterSpacing: "-0.8px", marginBottom: 40, textAlign: "center" }}>
+          Feature-by-feature breakdown
+        </h2>
 
-      {/* Comparison table */}
-      <section className="py-12">
-        <div className="max-w-6xl mx-auto px-6">
-          <h2 className="text-3xl font-bold mb-8 text-center">
-            Feature-by-feature comparison
-          </h2>
-          <div className="overflow-x-auto">
-            <table className="w-full border-collapse">
-              <thead>
-                <tr className="border-b border-[#27272a]">
-                  <th className="text-left py-4 px-6 text-zinc-500 font-medium text-sm w-1/3">Feature</th>
-                  <th className="py-4 px-6 text-center w-1/4">
-                    <div className="font-bold">
-                      <span style={{ color: "#ff1744" }}>Ziggy</span>
-                      <span className="text-white">Nexus</span>
-                    </div>
-                    <div className="text-emerald-500 text-sm font-semibold">$39/mo</div>
-                  </th>
-                  <th className="py-4 px-6 text-center w-1/4">
-                    <div className="font-bold text-zinc-400">Copilot</div>
-                    <div className="text-zinc-600 text-sm">$69/mo</div>
-                  </th>
-                  <th className="py-4 px-6 text-left text-zinc-500 font-medium text-sm w-1/3 hidden md:table-cell">Notes</th>
+        <div style={{ overflowX: "auto" }}>
+          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 15 }}>
+            <thead>
+              <tr>
+                <th style={{ textAlign: "left", padding: "14px 20px", color: "#555", fontWeight: 600, fontSize: 13, borderBottom: "1px solid #1f1f1f" }}>Feature</th>
+                <th style={{ textAlign: "center", padding: "14px 20px", color: ACCENT, fontWeight: 700, fontSize: 15, borderBottom: "1px solid #1f1f1f", background: "rgba(14,165,233,0.04)" }}>ZiggyNexus</th>
+                <th style={{ textAlign: "center", padding: "14px 20px", color: "#555", fontWeight: 600, fontSize: 13, borderBottom: "1px solid #1f1f1f" }}>Copilot</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                ["Starting price", "$39/mo", "$69/mo"],
+                ["Seats at base price", "5 seats", "1 seat"],
+                ["5-person team monthly cost", "$39", "$345"],
+                ["5-person team annual cost", "$468", "$4,140"],
+                ["Client portals", "Unlimited", "Unlimited"],
+                ["White-label portal", "✅ Yes", "✅ Yes"],
+                ["Custom domain", "✅ Yes", "✅ Yes (add-on on lower tier)"],
+                ["Secure file sharing", "✅ Yes", "✅ Yes"],
+                ["Client messaging", "✅ Yes", "✅ Yes"],
+                ["E-sign contracts", "✅ Built-in", "✅ Built-in"],
+                ["Invoice & payments (Stripe)", "✅ Yes", "✅ Yes"],
+                ["Project status updates", "✅ Yes", "✅ Yes"],
+                ["Intake forms", "✅ Yes", "✅ Yes"],
+                ["Knowledge base", "✅ Yes", "✅ Yes"],
+                ["Video updates", "🔧 Coming Soon", "✅ Yes"],
+                ["Zapier integration", "🔧 Coming Soon", "✅ Yes"],
+                ["Annual contract required", "No", "No"],
+                ["Free trial", "14 days, no credit card", "14 days"],
+              ].map(([feature, nexus, copilot], i) => (
+                <tr key={feature} style={{ background: i % 2 === 0 ? "transparent" : "#0d0d0d" }}>
+                  <td style={{ padding: "14px 20px", color: "#888", borderBottom: "1px solid #161616" }}>{feature}</td>
+                  <td style={{ padding: "14px 20px", color: "#fff", textAlign: "center", borderBottom: "1px solid #161616", background: "rgba(14,165,233,0.03)", fontWeight: 500 }}>{nexus}</td>
+                  <td style={{ padding: "14px 20px", color: "#555", textAlign: "center", borderBottom: "1px solid #161616" }}>{copilot}</td>
                 </tr>
-              </thead>
-              <tbody>
-                {comparisonRows.map((row, i) => (
-                  <tr
-                    key={row.feature}
-                    className={`border-t border-[#27272a] ${i % 2 === 0 ? "bg-transparent" : "bg-[#18181b]/40"}`}
-                  >
-                    <td className="py-4 px-6 text-sm text-zinc-300 font-medium">{row.feature}</td>
-                    <td className="py-4 px-6 text-center">
-                      <span className={`text-sm font-medium ${row.winner === "ziggynexus" ? "text-emerald-500" : "text-zinc-400"}`}>
-                        {row.winner === "ziggynexus" && (
-                          <svg className="w-4 h-4 inline mr-1 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
-                          </svg>
-                        )}
-                        {row.ziggynexus}
-                      </span>
-                    </td>
-                    <td className="py-4 px-6 text-center">
-                      <span className={`text-sm ${row.winner === "copilot" ? "text-emerald-500" : "text-zinc-500"}`}>
-                        {row.copilot}
-                      </span>
-                    </td>
-                    <td className="py-4 px-6 text-sm text-zinc-500 hidden md:table-cell">{row.note}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+              ))}
+            </tbody>
+          </table>
         </div>
-      </section>
 
-      {/* Why switch section */}
-      <section className="py-24 border-t border-[#27272a]">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
-            <div>
-              <h2 className="text-3xl font-bold mb-6">
-                Why agencies are switching from Copilot
-              </h2>
-              <div className="space-y-6">
-                {[
-                  {
-                    title: "The onboarding wizard is a game-changer",
-                    body: "Copilot doesn't have a built-in client onboarding wizard. ZiggyNexus does — and agencies report cutting new client setup time from hours to under 15 minutes.",
-                  },
-                  {
-                    title: "Unlimited portals, no tier confusion",
-                    body: "Copilot limits client portals on lower-priced plans. With ZiggyNexus, every plan includes unlimited portals. Grow your client base without watching a counter.",
-                  },
-                  {
-                    title: "No per-seat fees eating into margins",
-                    body: "Add your entire team — account managers, designers, copywriters — without paying per seat. ZiggyNexus is a flat $39/mo for your whole workspace.",
-                  },
-                  {
-                    title: "30 days to pay back the difference",
-                    body: "At $30/mo cheaper, ZiggyNexus pays back the price of its own trial in the first month compared to Copilot. It's $360 back in your pocket every year.",
-                  },
-                ].map((item) => (
-                  <div key={item.title} className="flex gap-4">
-                    <div className="w-6 h-6 rounded-full bg-emerald-500/20 flex items-center justify-center shrink-0 mt-0.5">
-                      <svg className="w-3 h-3 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
-                      </svg>
-                    </div>
-                    <div>
-                      <div className="font-semibold mb-1">{item.title}</div>
-                      <p className="text-zinc-400 text-sm leading-relaxed">{item.body}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="bg-[#18181b] border border-[#27272a] rounded-2xl p-8">
-              <h3 className="text-xl font-bold mb-6">The math is simple</h3>
-              <div className="space-y-4">
-                <div className="flex justify-between items-center py-3 border-b border-[#27272a]">
-                  <span className="text-zinc-400 text-sm">Copilot annual cost</span>
-                  <span className="font-semibold text-zinc-400 line-through">$828/yr</span>
-                </div>
-                <div className="flex justify-between items-center py-3 border-b border-[#27272a]">
-                  <span className="text-zinc-400 text-sm">ZiggyNexus annual cost</span>
-                  <span className="font-semibold text-emerald-500">$390/yr</span>
-                </div>
-                <div className="flex justify-between items-center py-3 bg-emerald-500/10 rounded-xl px-3">
-                  <span className="font-semibold">Your annual savings</span>
-                  <span className="font-bold text-emerald-500 text-xl">$438/yr</span>
-                </div>
-              </div>
-              <a
-                href="https://app.ziggynexus.com/signup"
-                className="block w-full text-center bg-emerald-500 hover:bg-emerald-400 text-black font-semibold px-6 py-3 rounded-xl text-sm transition-colors mt-6"
-              >
-                Start saving today — 14-day free trial
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="py-24 border-t border-[#27272a]">
-        <div className="max-w-6xl mx-auto px-6 text-center">
-          <h2 className="text-4xl font-bold mb-4">
-            Ready to make the switch?
-          </h2>
-          <p className="text-zinc-400 mb-8 max-w-xl mx-auto">
-            Import your client data, set up your portals, and be up and running
-            in under an hour. We&apos;ll help you migrate.
+        <div style={{
+          marginTop: 28,
+          background: ACCENT_BG,
+          border: `1px solid ${ACCENT_BORDER}`,
+          borderRadius: 12,
+          padding: "24px 28px",
+          textAlign: "center",
+        }}>
+          <p style={{ color: "#ccc", fontSize: 16, lineHeight: 1.7 }}>
+            💡 <strong style={{ color: "#fff" }}>Bottom line:</strong> Copilot charges $69/mo for 1 seat — a 5-person team is $345/mo. ZiggyNexus includes 5 seats at $39/mo. Same client portal experience,{" "}
+            <strong style={{ color: ACCENT }}>89% cheaper for a team.</strong>
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
-              href="https://app.ziggynexus.com/signup"
-              className="bg-emerald-500 hover:bg-emerald-400 text-black font-semibold px-8 py-4 rounded-xl text-base transition-colors inline-flex items-center justify-center gap-2"
-            >
-              Start Free Trial
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-              </svg>
-            </a>
-            <Link
-              href="/pricing"
-              className="border border-[#27272a] hover:border-emerald-500 text-white px-8 py-4 rounded-xl text-base transition-colors inline-flex items-center justify-center"
-            >
-              View full pricing
-            </Link>
-          </div>
         </div>
       </section>
-    </div>
-  );
+
+      {/* ── FINAL CTA ── */}
+      <section style={{
+        padding: "80px 24px",
+        textAlign: "center",
+        background: "#080808",
+        borderTop: "1px solid #1f1f1f",
+      }}>
+        <h2 style={{
+          fontSize: "clamp(28px, 4vw, 46px)",
+          fontWeight: 700,
+          letterSpacing: "-1px",
+          marginBottom: 16,
+          color: "#fff",
+        }}>
+          Ready to stop overpaying?
+        </h2>
+        <p style={{ fontSize: 17, color: "#555", marginBottom: 36 }}>
+          14 days free. No credit card. 5 seats included.
+        </p>
+        <a href="https://app.ziggynexus.com/signup" style={{
+          display: "inline-block",
+          background: ACCENT,
+          color: "#fff",
+          padding: "16px 36px",
+          borderRadius: 12,
+          fontSize: 17,
+          fontWeight: 700,
+        }}>
+          Start Free Trial — $39/mo →
+        </a>
+      </section>
+
+      {/* ── FOOTER ── */}
+      <footer style={{ background: "#050505", borderTop: "1px solid #111", padding: "32px 24px" }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto", textAlign: "center" }}>
+          <p style={{ fontSize: 13, color: "#333" }}>
+            Part of{" "}
+            <a href="https://ziggybusiness.com" style={{ color: "#555" }}>ZiggyTech Business Suite</a>
+            {" · "}
+            <a href="https://ziggybusiness.com" style={{ color: "#555" }}>ziggybusiness.com</a>
+          </p>
+          <p style={{ fontSize: 13, color: "#2a2a2a", marginTop: 8 }}>© 2026 ZiggyNexus. All rights reserved.</p>
+        </div>
+      </footer>
+    </>
+  )
 }

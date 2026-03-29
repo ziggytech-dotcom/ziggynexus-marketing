@@ -1,367 +1,804 @@
-import type { Metadata } from "next";
-import Link from "next/link";
+import Script from "next/script"
 
-export const metadata: Metadata = {
-  title: "ZiggyNexus — The client portal your clients will actually use.",
-  description:
-    "Give every client their own branded portal. Online invoicing, e-sign contracts, secure file sharing, and client messaging — all for $39/mo.",
-};
+const ACCENT = "#0ea5e9"
+const ACCENT_BG = "rgba(14,165,233,0.1)"
+const ACCENT_BORDER = "rgba(14,165,233,0.25)"
+const ACCENT_DIM = "rgba(14,165,233,0.03)"
 
-const features = [
-  {
-    icon: (
-      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-      </svg>
-    ),
-    title: "Branded White-Label Portals",
-    description:
-      "Every client gets their own portal with your branding — your logo, your colors, your domain. It feels like an extension of your business, not a third-party tool.",
-  },
-  {
-    icon: (
-      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-      </svg>
-    ),
-    title: "Online Invoicing",
-    description:
-      "Create and send professional invoices in seconds. Clients pay directly from their portal. Automatic reminders chase late payments so you don't have to.",
-  },
-  {
-    icon: (
-      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-      </svg>
-    ),
-    title: "Secure File Sharing",
-    description:
-      "Share deliverables, reports, and documents through encrypted, permission-controlled file storage. No more Google Drive links or email attachments.",
-  },
-  {
-    icon: (
-      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-      </svg>
-    ),
-    title: "E-Sign Contracts",
-    description:
-      "Send contracts for legally-binding electronic signature. Track who has viewed, signed, or declined. Never chase a signature over email again.",
-  },
-  {
-    icon: (
-      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-      </svg>
-    ),
-    title: "Client Messaging",
-    description:
-      "Centralized, threaded conversations keep client communication in one place. No more scattered email chains or missed Slack messages.",
-  },
-  {
-    icon: (
-      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-      </svg>
-    ),
-    title: "Onboarding Wizard",
-    description:
-      "Guide new clients through a structured onboarding flow. Collect information, request documents, and set expectations — automatically.",
-  },
-];
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "name": "ZiggyNexus",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web",
+      "url": "https://ziggynexus.com",
+      "description": "Client portal and collaboration hub for service businesses. Branded portals, secure file sharing, e-sign contracts, messaging, and invoicing — all for $39/mo.",
+      "offers": {
+        "@type": "Offer",
+        "price": "39.00",
+        "priceCurrency": "USD",
+        "priceSpecification": {
+          "@type": "UnitPriceSpecification",
+          "price": "39.00",
+          "priceCurrency": "USD",
+          "unitText": "MONTH",
+          "description": "Base plan — 5 seats included. Additional seats $12/seat/mo."
+        }
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How much does ZiggyNexus cost?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "ZiggyNexus is $39/mo and includes 5 seats. Need more team members? Add seats for $12/seat/mo. No tiers, no annual lock-in, no surprise fees."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How many clients can I add to my portal?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Unlimited. Every plan includes unlimited client portals. There are no per-client fees or limits on how many portals you can create."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I use my own domain for client portals?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Every portal is white-labeled with your branding — your logo, your colors, your custom domain. Clients see your brand, not ZiggyNexus."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does the free trial work?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You get 14 days free — no credit card required. Full access to all live features from day one. If it's not for you, just walk away."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need DocuSign for contract signing?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. ZiggyNexus includes built-in e-signature — no DocuSign, no HelloSign, no add-ons. Send a contract, get it signed, store it in the portal. Done."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does payment collection work?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "ZiggyNexus connects to Stripe. Send an invoice from inside the portal and your client pays via card or ACH — directly from their portal login. Funds go straight to your Stripe account."
+          }
+        }
+      ]
+    }
+  ]
+}
 
-const steps = [
-  {
-    step: "01",
-    title: "Create a portal in 60 seconds",
-    description:
-      "Add a client, set their portal name, upload your logo, and ZiggyNexus spins up a fully branded workspace — no coding or configuration required.",
-  },
-  {
-    step: "02",
-    title: "Invite your client",
-    description:
-      "Send a branded invite email. Your client creates their account and lands directly in their portal — not a generic dashboard full of other clients' data.",
-  },
-  {
-    step: "03",
-    title: "Run your whole relationship from one place",
-    description:
-      "Send invoices, share files, collect signatures, exchange messages, and track onboarding progress — all without leaving ZiggyNexus.",
-  },
-];
-
-const testimonials = [
-  {
-    quote:
-      "We switched from Copilot and immediately saved $360 a year. ZiggyNexus has everything we needed and the onboarding wizard alone has cut our new client setup time in half.",
-    name: "Sarah M.",
-    role: "Founder, Momentum Design Agency",
-  },
-  {
-    quote:
-      "My clients finally stop emailing me attachments. The file sharing and e-sign features are polished, fast, and my clients actually use them without me having to explain anything.",
-    name: "James T.",
-    role: "Independent Strategy Consultant",
-  },
-  {
-    quote:
-      "SuiteDash was a nightmare to configure and looked like it was built in 2012. ZiggyNexus took us 20 minutes to set up and our clients have complimented the portal design.",
-    name: "Priya K.",
-    role: "Operations Lead, Clearpath Advisory",
-  },
-];
-
-export default function HomePage() {
+export default function Home() {
   return (
-    <div className="bg-[#0f0a0a]">
-      {/* Hero */}
-      <section className="py-24 md:py-32 relative overflow-hidden">
-        {/* Background glow */}
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full bg-emerald-500/5 blur-3xl" />
-        </div>
-        <div className="max-w-6xl mx-auto px-6 relative">
-          <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 bg-[#18181b] border border-[#27272a] rounded-full px-4 py-1.5 text-sm text-zinc-400 mb-8">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-              Trusted by 500+ agencies and consultants
-            </div>
-            <h1 className="text-5xl md:text-7xl font-bold tracking-tight leading-[1.05] mb-6">
-              Give every client{" "}
-              <span className="text-emerald-500">their own portal.</span>
-            </h1>
-            <p className="text-xl text-zinc-400 leading-relaxed mb-10 max-w-2xl">
-              The client portal your clients will actually use. Branded
-              white-label workspaces, invoicing, file sharing, e-sign, and
-              messaging — all for $39/mo.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <a
-                href="https://app.ziggynexus.com/signup"
-                className="bg-emerald-500 hover:bg-emerald-400 text-black font-semibold px-8 py-4 rounded-xl text-base transition-colors inline-flex items-center justify-center gap-2"
-              >
-                Get Started Free
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                </svg>
-              </a>
-              <Link
-                href="/features"
-                className="border border-[#27272a] hover:border-emerald-500 text-white px-8 py-4 rounded-xl text-base transition-colors inline-flex items-center justify-center"
-              >
-                See Features
-              </Link>
+    <>
+      <Script
+        id="json-ld"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
+      <style>{`@media(max-width:768px){.nav-links{display:none}}`}</style>
+
+      {/* ── NAV ── */}
+      <nav style={{
+        position: "sticky",
+        top: 0,
+        zIndex: 100,
+        background: "rgba(10,10,10,0.92)",
+        backdropFilter: "blur(12px)",
+        borderBottom: "1px solid #1f1f1f",
+        padding: "0 24px",
+      }}>
+        <div style={{
+          maxWidth: 1120,
+          margin: "0 auto",
+          height: 64,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}>
+          <a href="/" style={{ fontSize: 22, fontWeight: 700, color: "#fff", letterSpacing: "-0.5px" }}>
+            Ziggy<span style={{ color: ACCENT }}>Nexus</span>
+          </a>
+
+          <div className="nav-links" style={{ display: "flex", alignItems: "center", gap: 32 }}>
+            <div style={{ display: "flex", gap: 28 }}>
+              {[
+                ["Features", "#features"],
+                ["Compare", "/vs/copilot"],
+                ["Pricing", "#pricing"],
+                ["Sign In", "https://app.ziggynexus.com/login"],
+              ].map(([label, href]) => (
+                <a key={label} href={href} style={{ color: "#888", fontSize: 15, fontWeight: 500 }}>
+                  {label}
+                </a>
+              ))}
             </div>
           </div>
+
+          <a href="https://app.ziggynexus.com/signup" style={{
+            background: ACCENT,
+            color: "#fff",
+            padding: "9px 20px",
+            borderRadius: 8,
+            fontSize: 14,
+            fontWeight: 600,
+            whiteSpace: "nowrap",
+          }}>
+            Start Free Trial
+          </a>
+        </div>
+      </nav>
+
+      {/* ── HERO ── */}
+      <section style={{
+        padding: "100px 24px 80px",
+        textAlign: "center",
+        maxWidth: 820,
+        margin: "0 auto",
+      }}>
+        <div style={{
+          display: "inline-block",
+          background: ACCENT_BG,
+          border: `1px solid ${ACCENT_BORDER}`,
+          borderRadius: 99,
+          padding: "6px 16px",
+          fontSize: 13,
+          color: ACCENT,
+          fontWeight: 600,
+          marginBottom: 28,
+          letterSpacing: "0.02em",
+        }}>
+          Copilot Alternative · 89% cheaper for a team
+        </div>
+
+        <h1 style={{
+          fontSize: "clamp(42px, 6vw, 68px)",
+          fontWeight: 700,
+          lineHeight: 1.08,
+          letterSpacing: "-1.5px",
+          marginBottom: 24,
+          color: "#fff",
+        }}>
+          One portal. Every client.<br />
+          <span style={{
+            background: `linear-gradient(135deg, #fff 0%, ${ACCENT} 100%)`,
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            backgroundClip: "text",
+          }}>Everything in one place.</span>
+        </h1>
+
+        <p style={{ fontSize: 19, color: "#888", lineHeight: 1.6, marginBottom: 40, maxWidth: 600, margin: "0 auto 40px" }}>
+          Stop managing clients over email, Slack, and Google Drive. Give every client a branded portal — with file sharing, e-sign contracts, messaging, and invoicing — for <strong style={{ color: "#fff" }}>$39/mo</strong>.
+        </p>
+
+        <div style={{ display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap", marginBottom: 20 }}>
+          <a href="https://app.ziggynexus.com/signup" style={{
+            background: ACCENT,
+            color: "#fff",
+            padding: "15px 30px",
+            borderRadius: 10,
+            fontSize: 16,
+            fontWeight: 600,
+          }}>
+            Start Free Trial — 14 days free
+          </a>
+          <a href="#pricing" style={{
+            background: "transparent",
+            color: "#fff",
+            padding: "15px 30px",
+            borderRadius: 10,
+            fontSize: 16,
+            fontWeight: 600,
+            border: "1px solid #333",
+          }}>
+            See Pricing
+          </a>
+        </div>
+
+        <p style={{ fontSize: 13, color: "#555", letterSpacing: "0.03em" }}>
+          No credit card · 14-day free trial · Unlimited client portals
+        </p>
+
+        {/* Trust badges */}
+        <div style={{
+          display: "flex",
+          gap: 24,
+          justifyContent: "center",
+          flexWrap: "wrap",
+          marginTop: 40,
+        }}>
+          {[
+            "✅ 5 seats included at $39/mo",
+            "🔒 White-label your own domain",
+            "✍️ Built-in e-sign — no DocuSign",
+          ].map(badge => (
+            <span key={badge} style={{
+              fontSize: 13,
+              color: "#666",
+              background: "#111",
+              border: "1px solid #1f1f1f",
+              borderRadius: 8,
+              padding: "8px 14px",
+            }}>
+              {badge}
+            </span>
+          ))}
         </div>
       </section>
 
-      {/* Social proof bar */}
-      <section className="border-y border-[#27272a] py-8">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="flex flex-wrap items-center justify-center gap-8 text-zinc-500 text-sm">
-            <span className="flex items-center gap-2">
-              <span className="text-emerald-500 font-bold text-lg">500+</span> agencies &amp; consultants
-            </span>
-            <span className="text-[#27272a]">|</span>
-            <span className="flex items-center gap-2">
-              <span className="text-emerald-500 font-bold text-lg">12k+</span> client portals created
-            </span>
-            <span className="text-[#27272a]">|</span>
-            <span className="flex items-center gap-2">
-              <span className="text-emerald-500 font-bold text-lg">$2.4M+</span> invoiced through ZiggyNexus
-            </span>
-            <span className="text-[#27272a]">|</span>
-            <span className="flex items-center gap-2">
-              <span className="text-emerald-500 font-bold text-lg">4.9★</span> average rating
-            </span>
-          </div>
+      {/* ── PROBLEM STRIP ── */}
+      <section style={{
+        background: "#0f0f0f",
+        borderTop: "1px solid #1f1f1f",
+        borderBottom: "1px solid #1f1f1f",
+        padding: "56px 24px",
+      }}>
+        <div style={{
+          maxWidth: 1000,
+          margin: "0 auto",
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+          gap: 32,
+          textAlign: "center",
+        }}>
+          {[
+            {
+              emoji: "📧",
+              headline: "Email is not a client portal.",
+              body: "Files buried in threads, contracts sent back and forth as attachments, clients asking \"where's the doc?\" — sound familiar? There's a better way.",
+            },
+            {
+              emoji: "🔗",
+              headline: "Link chaos is real.",
+              body: "Google Drive here, Dropbox there, DocuSign over there, a Slack channel, and an invoice in your email. Your clients deserve a single place for everything.",
+            },
+            {
+              emoji: "💸",
+              headline: "Copilot charges $69 per seat.",
+              body: "A 5-person agency pays $345/mo just for client portals. That's insane. ZiggyNexus includes 5 seats at $39/mo — same experience, fraction of the cost.",
+            },
+          ].map(({ emoji, headline, body }) => (
+            <div key={headline}>
+              <div style={{ fontSize: 36, marginBottom: 12 }}>{emoji}</div>
+              <h3 style={{ fontSize: 18, fontWeight: 700, color: "#fff", marginBottom: 8 }}>{headline}</h3>
+              <p style={{ fontSize: 15, color: "#666", lineHeight: 1.6 }}>{body}</p>
+            </div>
+          ))}
         </div>
       </section>
 
-      {/* Features Grid */}
-      <section className="py-24">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
-              Everything your client relationship needs
-            </h2>
-            <p className="text-zinc-400 text-lg max-w-2xl mx-auto">
-              Six powerful features in one unified platform. No integrations, no
-              duct-tape — it just works.
-            </p>
+      {/* ── FEATURES ── */}
+      <section id="features" style={{ padding: "96px 24px", maxWidth: 1100, margin: "0 auto" }}>
+        <div style={{ textAlign: "center", marginBottom: 64 }}>
+          <h2 style={{ fontSize: "clamp(32px, 4vw, 48px)", fontWeight: 700, letterSpacing: "-1px", marginBottom: 16 }}>
+            Everything your clients need. All in one place.
+          </h2>
+          <p style={{ fontSize: 17, color: "#666", maxWidth: 520, margin: "0 auto" }}>
+            One login for your client. One dashboard for your team. No more juggling five different tools.
+          </p>
+        </div>
+
+        <div style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+          gap: 20,
+        }}>
+          {[
+            {
+              icon: "🏷️",
+              title: "Branded Client Portal",
+              desc: "Your logo, your domain, your colors. Every client gets their own white-labeled portal — it looks and feels like an extension of your business, not a third-party tool.",
+            },
+            {
+              icon: "📁",
+              title: "Secure File Sharing",
+              desc: "Share deliverables, reports, and documents through encrypted storage. Clients upload files to you too. No more Google Drive links, email attachments, or lost files.",
+            },
+            {
+              icon: "💬",
+              title: "Built-in Messaging",
+              desc: "All client communication in one thread, inside the portal. No more scattered Slack DMs, email chains, and WhatsApp messages. One conversation. Always findable.",
+            },
+            {
+              icon: "✍️",
+              title: "E-Sign Contracts",
+              desc: "Send contracts for legally binding electronic signature — built right in. No DocuSign, no HelloSign, no add-ons. Track who signed, who viewed, who declined.",
+            },
+            {
+              icon: "💳",
+              title: "Invoicing & Payments",
+              desc: "Send invoices and collect payment via Stripe — directly inside the client's portal. Card and ACH accepted. Funds go straight to your account.",
+            },
+            {
+              icon: "📊",
+              title: "Project Status Updates",
+              desc: "Clients see progress without you sending a weekly email. Update milestones and statuses inside the portal — clients log in and see what's done and what's next.",
+            },
+            {
+              icon: "📋",
+              title: "Intake Forms",
+              desc: "Collect project briefs, onboarding info, creative assets, and approvals — all through structured forms inside the portal. No more back-and-forth for basic info.",
+            },
+            {
+              icon: "📚",
+              title: "Knowledge Base",
+              desc: "Build a resource hub inside each portal. Share SOPs, FAQs, guides, how-to videos, and brand assets. Clients self-serve instead of pinging you.",
+            },
+          ].map(({ icon, title, desc }) => (
+            <div key={title} style={{
+              background: "#111111",
+              border: "1px solid #1f1f1f",
+              borderRadius: 14,
+              padding: "28px 24px",
+            }}>
+              <div style={{ fontSize: 32, marginBottom: 14 }}>{icon}</div>
+              <h3 style={{ fontSize: 18, fontWeight: 700, color: "#fff", marginBottom: 10 }}>{title}</h3>
+              <p style={{ fontSize: 14, color: "#666", lineHeight: 1.65 }}>{desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ── COMING SOON STRIP ── */}
+      <section style={{
+        background: "#0d0d0d",
+        borderTop: "1px solid #1f1f1f",
+        borderBottom: "1px solid #1f1f1f",
+        padding: "64px 24px",
+      }}>
+        <div style={{ maxWidth: 1000, margin: "0 auto" }}>
+          <div style={{ textAlign: "center", marginBottom: 40 }}>
+            <h2 style={{ fontSize: 28, fontWeight: 700, marginBottom: 8 }}>What's coming next</h2>
+            <p style={{ color: "#555", fontSize: 15 }}>We ship fast. Here's what's already in the pipeline.</p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {features.map((feature) => (
-              <div
-                key={feature.title}
-                className="bg-[#18181b] border border-[#27272a] rounded-2xl p-6 hover:border-emerald-500/40 transition-colors group"
-              >
-                <div className="w-12 h-12 rounded-xl bg-emerald-500/10 flex items-center justify-center text-emerald-500 mb-4 group-hover:bg-emerald-500/20 transition-colors">
-                  {feature.icon}
+
+          <div style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+            gap: 16,
+          }}>
+            {[
+              {
+                icon: "🎥",
+                title: "Video Updates",
+                badge: "Coming Soon",
+                badgeColor: "#0066ff",
+                desc: "Record short video messages for clients — right inside the portal. No Loom account needed.",
+              },
+              {
+                icon: "⭐",
+                title: "Client Satisfaction Surveys",
+                badge: "Coming Soon",
+                badgeColor: "#0066ff",
+                desc: "Automated NPS and satisfaction check-ins after project milestones. Know how your clients feel before they churn.",
+              },
+              {
+                icon: "⚡",
+                title: "Zapier Integration",
+                badge: "Coming Soon",
+                badgeColor: "#0066ff",
+                desc: "Connect ZiggyNexus to thousands of tools via Zapier. Automate onboarding, notifications, and more.",
+              },
+            ].map(({ icon, title, badge, badgeColor, desc }) => (
+              <div key={title} style={{
+                background: "#111111",
+                border: "1px solid #1f1f1f",
+                borderRadius: 14,
+                padding: "24px 22px",
+              }}>
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 12 }}>
+                  <span style={{ fontSize: 28 }}>{icon}</span>
+                  <span style={{
+                    background: `${badgeColor}20`,
+                    color: badgeColor,
+                    border: `1px solid ${badgeColor}40`,
+                    borderRadius: 99,
+                    padding: "3px 10px",
+                    fontSize: 11,
+                    fontWeight: 700,
+                    letterSpacing: "0.04em",
+                    textTransform: "uppercase" as const,
+                  }}>{badge}</span>
                 </div>
-                <h3 className="text-lg font-semibold mb-2">{feature.title}</h3>
-                <p className="text-zinc-400 text-sm leading-relaxed">
-                  {feature.description}
-                </p>
+                <h3 style={{ fontSize: 16, fontWeight: 700, color: "#fff", marginBottom: 6 }}>{title}</h3>
+                <p style={{ fontSize: 13, color: "#666", lineHeight: 1.6, marginTop: 6 }}>{desc}</p>
               </div>
             ))}
           </div>
-          <div className="text-center mt-10">
-            <Link
-              href="/features"
-              className="border border-[#27272a] hover:border-emerald-500 text-white px-6 py-3 rounded-xl text-sm transition-colors inline-flex items-center gap-2"
-            >
-              Explore all features
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-              </svg>
-            </Link>
-          </div>
         </div>
       </section>
 
-      {/* How it works */}
-      <section className="py-24 border-t border-[#27272a]">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
-              Up and running in minutes
+      {/* ── INDUSTRIES ── */}
+      <section style={{
+        padding: "96px 24px",
+        background: "#080808",
+        borderTop: "1px solid #1f1f1f",
+        borderBottom: "1px solid #1f1f1f",
+      }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+          <div style={{ textAlign: "center", marginBottom: 56 }}>
+            <h2 style={{ fontSize: "clamp(30px, 4vw, 46px)", fontWeight: 700, letterSpacing: "-1px", marginBottom: 14 }}>
+              Built for your industry
             </h2>
-            <p className="text-zinc-400 text-lg max-w-xl mx-auto">
-              No complex setup. No developer needed. Just sign up and start
-              impressing your clients.
+            <p style={{ fontSize: 17, color: "#666", maxWidth: 520, margin: "0 auto" }}>
+              Whether you run an agency, a consultancy, or a coaching practice — ZiggyNexus fits your workflow.
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {steps.map((step) => (
-              <div key={step.step} className="relative">
-                <div className="text-6xl font-bold text-[#27272a] mb-4 font-mono">
-                  {step.step}
+
+          <div style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
+            gap: 16,
+            marginBottom: 40,
+          }}>
+            {[
+              { icon: "🎨", name: "Marketing & Creative Agencies", desc: "Client portals for every account — campaign files, approvals, deliverables, and reporting in one place." },
+              { icon: "💻", name: "Web & Dev Agencies", desc: "Project portals with staging links, dev updates, feedback loops, and final file delivery." },
+              { icon: "💼", name: "Consultants & Advisors", desc: "Deliverable sharing, meeting notes, strategy docs, and engagement contracts — all client-facing." },
+              { icon: "🎓", name: "Coaches & Course Creators", desc: "Student portals with homework submission, course materials, progress tracking, and session notes." },
+              { icon: "🏠", name: "Real Estate Agencies", desc: "Transaction portals with document collection, inspection reports, and milestone updates for buyers and sellers." },
+              { icon: "📊", name: "Accounting & Finance", desc: "Secure document exchange for tax docs, statements, and reports — with built-in messaging for client queries." },
+              { icon: "🏗️", name: "Architects & Interior Design", desc: "Design reviews, mood boards, project timelines, material approvals, and contractor coordination." },
+              { icon: "🎯", name: "PR & Communications", desc: "Campaign portals with press materials, media kits, coverage reports, and approval workflows." },
+            ].map(({ icon, name, desc }) => (
+              <div key={name} style={{
+                background: "#111111",
+                border: "1px solid #1f1f1f",
+                borderRadius: 14,
+                padding: "24px 22px",
+                display: "flex",
+                alignItems: "flex-start",
+                gap: 16,
+              }}>
+                <span style={{ fontSize: 32, flexShrink: 0, lineHeight: 1 }}>{icon}</span>
+                <div>
+                  <h3 style={{ fontSize: 15, fontWeight: 700, color: "#fff", marginBottom: 5 }}>{name}</h3>
+                  <p style={{ fontSize: 13, color: "#666", lineHeight: 1.55, margin: 0 }}>{desc}</p>
                 </div>
-                <h3 className="text-xl font-semibold mb-3">{step.title}</h3>
-                <p className="text-zinc-400 leading-relaxed">{step.description}</p>
               </div>
             ))}
           </div>
-        </div>
-      </section>
 
-      {/* Pricing teaser */}
-      <section className="py-24 border-t border-[#27272a]">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="bg-[#18181b] border border-[#27272a] rounded-2xl p-8 md:p-12 flex flex-col md:flex-row items-center justify-between gap-8">
+          {/* Custom callout */}
+          <div style={{
+            background: ACCENT_BG,
+            border: `1px solid ${ACCENT_BORDER}`,
+            borderRadius: 14,
+            padding: "32px 36px",
+            display: "flex",
+            flexWrap: "wrap" as const,
+            alignItems: "center",
+            justifyContent: "space-between",
+            gap: 20,
+          }}>
             <div>
-              <div className="text-sm text-emerald-500 font-medium mb-2 uppercase tracking-wide">Simple pricing</div>
-              <h2 className="text-4xl font-bold mb-3">
-                One plan. Everything included.
-              </h2>
-              <p className="text-zinc-400 max-w-lg">
-                No feature tiers, no per-client fees, no surprise overage charges.
-                Unlimited portals, all six features, one flat monthly rate.
+              <h3 style={{ fontSize: 18, fontWeight: 700, color: "#fff", marginBottom: 6 }}>Don't see your industry?</h3>
+              <p style={{ fontSize: 15, color: "#888", maxWidth: 480, lineHeight: 1.6, margin: 0 }}>
+                ZiggyNexus works for any service business managing ongoing clients. Every plan includes onboarding support to get your portals set up right.
               </p>
             </div>
-            <div className="text-center md:text-right shrink-0">
-              <div className="text-6xl font-bold mb-1">
-                $39
-                <span className="text-2xl text-zinc-400 font-normal">/mo</span>
-              </div>
-              <p className="text-zinc-500 text-sm mb-6">Unlimited client portals</p>
-              <div className="flex flex-col sm:flex-row gap-3 justify-center md:justify-end">
-                <a
-                  href="https://app.ziggynexus.com/signup"
-                  className="bg-emerald-500 hover:bg-emerald-400 text-black font-semibold px-6 py-3 rounded-xl text-sm transition-colors"
-                >
-                  Start Free Trial
-                </a>
-                <Link
-                  href="/pricing"
-                  className="border border-[#27272a] hover:border-emerald-500 text-white px-6 py-3 rounded-xl text-sm transition-colors"
-                >
-                  See full pricing
-                </Link>
-              </div>
-            </div>
+            <a href="mailto:hello@ziggynexus.com" style={{
+              background: ACCENT,
+              color: "#fff",
+              padding: "13px 26px",
+              borderRadius: 9,
+              fontSize: 15,
+              fontWeight: 600,
+              whiteSpace: "nowrap" as const,
+              flexShrink: 0,
+            }}>
+              Contact Us →
+            </a>
           </div>
         </div>
       </section>
 
-      {/* Testimonials */}
-      <section className="py-24 border-t border-[#27272a]">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
-              Loved by service professionals
-            </h2>
-            <p className="text-zinc-400 text-lg">
-              Join hundreds of agencies and consultants who made the switch.
+      {/* ── COMPARISON TABLE ── */}
+      <section style={{ padding: "96px 24px", maxWidth: 900, margin: "0 auto" }}>
+        <div style={{ textAlign: "center", marginBottom: 48 }}>
+          <h2 style={{ fontSize: "clamp(28px, 4vw, 42px)", fontWeight: 700, letterSpacing: "-0.8px", marginBottom: 12 }}>
+            ZiggyNexus vs Copilot
+          </h2>
+          <p style={{ color: "#666", fontSize: 16 }}>
+            Same client portal experience. 89% cheaper for a team.
+          </p>
+        </div>
+
+        <div style={{ overflowX: "auto" }}>
+          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 15 }}>
+            <thead>
+              <tr>
+                <th style={{ textAlign: "left", padding: "14px 20px", color: "#555", fontWeight: 600, fontSize: 13, borderBottom: "1px solid #1f1f1f" }}>Feature</th>
+                <th style={{ textAlign: "center", padding: "14px 20px", color: ACCENT, fontWeight: 700, fontSize: 15, borderBottom: "1px solid #1f1f1f", background: ACCENT_DIM }}>ZiggyNexus</th>
+                <th style={{ textAlign: "center", padding: "14px 20px", color: "#555", fontWeight: 600, fontSize: 13, borderBottom: "1px solid #1f1f1f" }}>Copilot</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                ["Price", "$39/mo", "$69/mo per seat"],
+                ["Seats included", "5 seats", "1 seat"],
+                ["5-person team cost", "$39/mo total", "$345/mo total"],
+                ["Client portals", "✅ Unlimited", "✅ Unlimited"],
+                ["White-label domain", "✅ Yes", "✅ Yes"],
+                ["Secure file sharing", "✅ Yes", "✅ Yes"],
+                ["Built-in messaging", "✅ Yes", "✅ Yes"],
+                ["E-sign contracts", "✅ Built-in", "✅ Built-in"],
+                ["Invoicing & payments", "✅ Via Stripe", "✅ Via Stripe"],
+                ["Intake forms", "✅ Yes", "✅ Yes"],
+                ["Knowledge base", "✅ Yes", "✅ Yes"],
+                ["Video updates", "🔧 Coming Soon", "✅ Yes"],
+                ["Contract required", "No — cancel anytime", "No"],
+              ].map(([feature, nexus, copilot], i) => (
+                <tr key={feature} style={{ background: i % 2 === 0 ? "transparent" : "#0d0d0d" }}>
+                  <td style={{ padding: "14px 20px", color: "#888", borderBottom: "1px solid #161616" }}>{feature}</td>
+                  <td style={{ padding: "14px 20px", color: "#fff", textAlign: "center", borderBottom: "1px solid #161616", background: ACCENT_DIM, fontWeight: 500 }}>{nexus}</td>
+                  <td style={{ padding: "14px 20px", color: "#555", textAlign: "center", borderBottom: "1px solid #161616" }}>{copilot}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <div style={{
+          marginTop: 24,
+          background: ACCENT_BG,
+          border: `1px solid ${ACCENT_BORDER}`,
+          borderRadius: 12,
+          padding: "20px 24px",
+          textAlign: "center",
+        }}>
+          <p style={{ color: "#ccc", fontSize: 15, lineHeight: 1.7 }}>
+            💡 <strong style={{ color: "#fff" }}>Bottom line:</strong> Copilot charges $69/mo for 1 seat — a 5-person team is $345/mo. ZiggyNexus includes 5 seats at $39/mo. Same client portal experience, <strong style={{ color: ACCENT }}>89% cheaper for a team.</strong>
+          </p>
+        </div>
+
+        <p style={{ textAlign: "center", marginTop: 16, fontSize: 13, color: "#444" }}>
+          Pricing data sourced from Copilot.com · Updated March 2026
+        </p>
+      </section>
+
+      {/* ── PRICING ── */}
+      <section id="pricing" style={{
+        padding: "96px 24px",
+        background: "#080808",
+        borderTop: "1px solid #1f1f1f",
+        borderBottom: "1px solid #1f1f1f",
+      }}>
+        <div style={{ maxWidth: 540, margin: "0 auto", textAlign: "center" }}>
+          <h2 style={{ fontSize: "clamp(28px, 4vw, 42px)", fontWeight: 700, letterSpacing: "-0.8px", marginBottom: 12 }}>
+            Simple pricing. No per-seat games.
+          </h2>
+          <p style={{ color: "#666", fontSize: 16, marginBottom: 48 }}>
+            One plan. Five seats included. Scales with your team.
+          </p>
+
+          <div style={{
+            background: "#111111",
+            border: `2px solid ${ACCENT}`,
+            borderRadius: 20,
+            padding: "40px 36px",
+            marginBottom: 20,
+          }}>
+            <div style={{ fontSize: 13, fontWeight: 700, color: ACCENT, textTransform: "uppercase" as const, letterSpacing: "0.1em", marginBottom: 12 }}>
+              ZiggyNexus — Base Plan
+            </div>
+            <div style={{ display: "flex", alignItems: "baseline", justifyContent: "center", gap: 4, marginBottom: 4 }}>
+              <span style={{ fontSize: 64, fontWeight: 700, color: "#fff", letterSpacing: "-2px" }}>$39</span>
+              <span style={{ fontSize: 18, color: "#555" }}>/mo</span>
+            </div>
+            <p style={{ color: "#555", fontSize: 14, marginBottom: 32 }}>
+              5 seats included · +$12/seat/mo after that
+            </p>
+
+            <ul style={{ listStyle: "none", padding: 0, marginBottom: 32, textAlign: "left" }}>
+              {[
+                "Unlimited client portals",
+                "Branded white-label portal (your domain)",
+                "Secure file sharing",
+                "Built-in client messaging",
+                "E-sign contracts (no DocuSign needed)",
+                "Invoicing & Stripe payment collection",
+                "Project status updates",
+                "Intake forms",
+                "Knowledge base / resource hub",
+                "5 team seats included",
+              ].map(item => (
+                <li key={item} style={{ padding: "7px 0", fontSize: 15, color: "#ccc", display: "flex", alignItems: "center", gap: 10, borderBottom: "1px solid #1a1a1a" }}>
+                  <span style={{ color: ACCENT, fontWeight: 700, flexShrink: 0 }}>✓</span> {item}
+                </li>
+              ))}
+            </ul>
+
+            <a href="https://app.ziggynexus.com/signup" style={{
+              display: "block",
+              background: ACCENT,
+              color: "#fff",
+              padding: "16px",
+              borderRadius: 10,
+              fontSize: 16,
+              fontWeight: 700,
+              textAlign: "center",
+            }}>
+              Start Free Trial — No credit card required
+            </a>
+          </div>
+
+          {/* Bundle callout */}
+          <div style={{
+            background: "#111111",
+            border: "1px solid #1f1f1f",
+            borderRadius: 14,
+            padding: "22px 24px",
+            textAlign: "center",
+          }}>
+            <p style={{ color: "#888", fontSize: 14, lineHeight: 1.6 }}>
+              🏢 <strong style={{ color: "#fff" }}>Running a full business?</strong> Get all ZiggyTech apps — including ZiggyNexus — for a flat monthly rate with the ZiggyTech Business Suite.{" "}
+              <a href="https://ziggybusiness.com" style={{ color: ACCENT, textDecoration: "underline" }}>Learn more →</a>
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {testimonials.map((t) => (
-              <div
-                key={t.name}
-                className="bg-[#18181b] border border-[#27272a] rounded-2xl p-6"
-              >
-                <div className="flex gap-1 mb-4">
-                  {[...Array(5)].map((_, i) => (
-                    <svg key={i} className="w-4 h-4 text-emerald-500" fill="currentColor" viewBox="0 0 20 20">
-                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                    </svg>
-                  ))}
-                </div>
-                <blockquote className="text-zinc-300 leading-relaxed mb-6 text-sm">
-                  &ldquo;{t.quote}&rdquo;
-                </blockquote>
-                <div>
-                  <div className="font-semibold text-sm">{t.name}</div>
-                  <div className="text-zinc-500 text-sm">{t.role}</div>
-                </div>
+        </div>
+      </section>
+
+      {/* ── FAQ ── */}
+      <section style={{ padding: "96px 24px", maxWidth: 740, margin: "0 auto" }}>
+        <h2 style={{ fontSize: "clamp(28px, 4vw, 38px)", fontWeight: 700, letterSpacing: "-0.6px", marginBottom: 48, textAlign: "center" }}>
+          Questions? We've got answers.
+        </h2>
+
+        <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
+          {[
+            {
+              q: "How much does ZiggyNexus cost?",
+              a: "$39/mo. That includes 5 seats. Need more people on your team? Add seats for $12/seat/mo. No tiers, no annual lock-in, no surprise fees.",
+            },
+            {
+              q: "How many clients can I add?",
+              a: "Unlimited. Every plan includes unlimited client portals. There are no caps on how many portals you can create or how many clients you can serve.",
+            },
+            {
+              q: "Can I use my own domain for client portals?",
+              a: "Yes. Every portal is white-labeled with your branding — your logo, your colors, and your custom domain. Clients see your brand, not ZiggyNexus.",
+            },
+            {
+              q: "How does the free trial work?",
+              a: "Sign up and get 14 days free — no credit card required. Full access to every live feature from day one. If it's not for you, just walk away. Nothing to cancel.",
+            },
+            {
+              q: "Do I need DocuSign for contract signing?",
+              a: "No. E-signature is built right into ZiggyNexus. Send a contract, get it signed, and it's stored in the portal forever. No add-ons, no third-party accounts.",
+            },
+            {
+              q: "How does payment collection work?",
+              a: "ZiggyNexus connects to Stripe. Send an invoice from inside the portal and your client pays via card or ACH — directly from their portal login. Funds hit your Stripe account automatically.",
+            },
+          ].map(({ q, a }) => (
+            <details key={q} style={{
+              background: "#111111",
+              border: "1px solid #1f1f1f",
+              borderRadius: 10,
+              overflow: "hidden",
+            }}>
+              <summary style={{
+                padding: "20px 24px",
+                fontSize: 16,
+                fontWeight: 600,
+                color: "#fff",
+                cursor: "pointer",
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}>
+                {q}
+                <span style={{ color: ACCENT, fontSize: 20, fontWeight: 400, flexShrink: 0 }}>+</span>
+              </summary>
+              <div style={{ padding: "0 24px 20px", fontSize: 15, color: "#777", lineHeight: 1.7, borderTop: "1px solid #1a1a1a" }}>
+                <p style={{ marginTop: 16 }}>{a}</p>
               </div>
+            </details>
+          ))}
+        </div>
+      </section>
+
+      {/* ── FINAL CTA ── */}
+      <section style={{
+        padding: "100px 24px",
+        textAlign: "center",
+        background: "linear-gradient(180deg, #0a0a0a 0%, #050d10 100%)",
+        borderTop: "1px solid #1f1f1f",
+      }}>
+        <h2 style={{
+          fontSize: "clamp(36px, 5vw, 58px)",
+          fontWeight: 700,
+          letterSpacing: "-1.5px",
+          marginBottom: 20,
+          lineHeight: 1.1,
+        }}>
+          Your clients deserve better<br />
+          <span style={{
+            background: `linear-gradient(135deg, #fff 0%, ${ACCENT} 100%)`,
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            backgroundClip: "text",
+          }}>than your inbox.</span>
+        </h2>
+        <p style={{ fontSize: 18, color: "#555", marginBottom: 40 }}>
+          14 days free. No credit card. Unlimited portals from day one.
+        </p>
+        <a href="https://app.ziggynexus.com/signup" style={{
+          display: "inline-block",
+          background: ACCENT,
+          color: "#fff",
+          padding: "18px 40px",
+          borderRadius: 12,
+          fontSize: 18,
+          fontWeight: 700,
+          letterSpacing: "-0.2px",
+        }}>
+          Start Free Trial →
+        </a>
+      </section>
+
+      {/* ── FOOTER ── */}
+      <footer style={{
+        background: "#050505",
+        borderTop: "1px solid #111",
+        padding: "40px 24px",
+      }}>
+        <div style={{
+          maxWidth: 1100,
+          margin: "0 auto",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: 20,
+          textAlign: "center",
+        }}>
+          <div style={{ display: "flex", gap: 28, flexWrap: "wrap" as const, justifyContent: "center" }}>
+            {[
+              ["Home", "/"],
+              ["Features", "#features"],
+              ["Compare", "/vs/copilot"],
+              ["Pricing", "#pricing"],
+              ["Privacy", "/privacy"],
+              ["Terms", "/terms"],
+              ["Sign In", "https://app.ziggynexus.com/login"],
+            ].map(([label, href]) => (
+              <a key={label} href={href} style={{ color: "#555", fontSize: 14, fontWeight: 500 }}>
+                {label}
+              </a>
             ))}
           </div>
-        </div>
-      </section>
 
-      {/* Final CTA */}
-      <section className="py-24 border-t border-[#27272a]">
-        <div className="max-w-6xl mx-auto px-6 text-center">
-          <div className="relative">
-            <div className="absolute inset-0 pointer-events-none">
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] rounded-full bg-emerald-500/5 blur-3xl" />
-            </div>
-            <h2 className="text-4xl md:text-6xl font-bold tracking-tight mb-6 relative">
-              Your clients deserve a{" "}
-              <span className="text-emerald-500">better experience.</span>
-            </h2>
-            <p className="text-zinc-400 text-xl mb-10 max-w-2xl mx-auto relative">
-              Start your free trial today. No credit card required. Set up your
-              first client portal in under 5 minutes.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center relative">
-              <a
-                href="https://app.ziggynexus.com/signup"
-                className="bg-emerald-500 hover:bg-emerald-400 text-black font-semibold px-8 py-4 rounded-xl text-base transition-colors inline-flex items-center justify-center gap-2"
-              >
-                Get Started Free — $39/mo
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                </svg>
-              </a>
-              <Link
-                href="/vs/copilot"
-                className="border border-[#27272a] hover:border-emerald-500 text-white px-8 py-4 rounded-xl text-base transition-colors inline-flex items-center justify-center"
-              >
-                Compare vs Copilot
-              </Link>
-            </div>
-            <p className="text-zinc-600 text-sm mt-6 relative">
-              14-day free trial &middot; No credit card required &middot; Cancel anytime
-            </p>
-          </div>
+          <p style={{ fontSize: 13, color: "#333" }}>
+            Part of{" "}
+            <a href="https://ziggybusiness.com" style={{ color: "#555" }}>ZiggyTech Business Suite</a>
+            {" · "}
+            <a href="https://ziggybusiness.com" style={{ color: "#555" }}>ziggybusiness.com</a>
+          </p>
+
+          <p style={{ fontSize: 13, color: "#2a2a2a" }}>
+            © 2026 ZiggyNexus. All rights reserved.
+          </p>
         </div>
-      </section>
-    </div>
-  );
+      </footer>
+    </>
+  )
 }
