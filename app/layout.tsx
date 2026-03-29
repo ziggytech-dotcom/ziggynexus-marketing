@@ -34,6 +34,12 @@ export const metadata: Metadata = {
       "Give every client their own branded portal. Starting at $39/mo.",
   },
   metadataBase: new URL("https://ziggynexus.com"),
+
+  icons: {
+    icon: "/favicon.png",
+    shortcut: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
+  },
 };
 
 export default function RootLayout({
