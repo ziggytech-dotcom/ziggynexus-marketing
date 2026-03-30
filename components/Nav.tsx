@@ -12,10 +12,9 @@ export default function Nav() {
       <div className="max-w-6xl mx-auto px-6">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link href="/" className="text-xl font-bold tracking-tight">
-            <span style={{ color: "#ff1744" }}>Ziggy</span>
-            <span className="text-white">Nexus</span>
-          </Link>
+          <a href="/" style={{ textDecoration: "none", display: "flex", alignItems: "center" }}>
+            <img src="/ziggynexus-wordmark-v3.png" alt="ZiggyNexus" style={{ height: 32, width: "auto" }} />
+          </a>
 
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center gap-8">
