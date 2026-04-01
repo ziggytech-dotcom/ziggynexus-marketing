@@ -4,10 +4,12 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Pricing — ZiggyNexus",
   description:
-    "ZiggyNexus costs $39/mo. Unlimited client portals, all features included. No per-seat fees, no feature tiers, no surprises.",
+    "ZiggyNexus costs $39/mo. 5 team seats included, unlimited client portals, all features included. $12/seat/mo after 5 seats. No feature tiers, no surprises.",
 };
 
 const includedFeatures = [
+  "5 team seats included",
+  "+$12/seat/mo after 5 seats",
   "Unlimited client portals",
   "Branded white-label portals with custom domain",
   "Online invoicing with Stripe payments",
@@ -40,12 +42,12 @@ const faqs = [
   {
     question: "Is there a per-user or per-seat fee for my team?",
     answer:
-      "No. You can add as many team members as you need at no extra cost. The $39/mo covers your entire workspace, not individual seats.",
+      "Your $39/mo subscription includes 5 team seats. Additional seats are $12/seat/mo. For most small businesses and agencies, 5 seats covers the whole team — and you still pay a fraction of what Copilot charges for a single seat ($69/mo).",
   },
   {
     question: "What payment methods do you accept?",
     answer:
-      "We accept all major credit cards (Visa, Mastercard, Amex) via Stripe. Annual billing is available at a 2-month discount ($390/yr).",
+      "We accept all major credit cards (Visa, Mastercard, Amex) via Stripe. Annual billing is available at 10% off ($421/yr).",
   },
   {
     question: "Can I cancel anytime?",
@@ -65,7 +67,7 @@ const faqs = [
   {
     question: "Is there an annual plan?",
     answer:
-      "Yes — pay annually and get 2 months free, bringing your effective cost to $32.50/mo ($390/yr). Switch to annual anytime from your billing settings.",
+      "Yes — pay annually and save 10%, bringing your effective cost to $35/mo ($421/yr). Switch to annual anytime from your billing settings.",
   },
 ];
 
@@ -79,7 +81,7 @@ const comparisonRows = [
   { feature: "Secure file sharing", ziggynexus: true, copilot: true, suitedash: true },
   { feature: "Client messaging", ziggynexus: true, copilot: true, suitedash: true },
   { feature: "Onboarding wizard", ziggynexus: true, copilot: false, suitedash: true },
-  { feature: "No per-seat fees", ziggynexus: true, copilot: false, suitedash: false },
+  { feature: "5 seats included", ziggynexus: true, copilot: false, suitedash: false },
   { feature: "Modern, clean UI", ziggynexus: true, copilot: true, suitedash: false },
   { feature: "Setup time", ziggynexus: "< 5 min", copilot: "~30 min", suitedash: "Hours" },
   { feature: "API access", ziggynexus: true, copilot: true, suitedash: true },
@@ -134,7 +136,7 @@ export default function PricingPage() {
                   $39
                   <span className="text-xl text-zinc-400 font-normal">/mo</span>
                 </div>
-                <p className="text-zinc-500">or $390/yr (save $78)</p>
+                <p className="text-zinc-500">or $421/yr — save 10% with annual billing</p>
               </div>
 
               <ul className="space-y-3 mb-8">
