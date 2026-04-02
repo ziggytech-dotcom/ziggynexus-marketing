@@ -121,26 +121,30 @@ export default function PricingPage() {
         </div>
       </section>
 
-      {/* Pricing card */}
+      {/* Pricing cards */}
       <section className="pb-24">
         <div className="max-w-6xl mx-auto px-6">
-          <div className="max-w-lg mx-auto">
-            <div className="bg-[#18181b] border-2 border-emerald-500/50 rounded-2xl p-8 relative">
-              <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                <span className="bg-emerald-500 text-black text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
-                  Most Popular
-                </span>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* Starter */}
+            <div className="bg-[#18181b] border border-[#27272a] rounded-2xl p-8">
+              <div className="text-emerald-500 text-xs font-bold uppercase tracking-widest mb-2">Starter</div>
+              <div className="text-5xl font-bold mb-1">
+                $39
+                <span className="text-xl text-zinc-400 font-normal">/mo</span>
               </div>
-              <div className="text-center mb-8">
-                <div className="text-5xl font-bold mb-1">
-                  $39
-                  <span className="text-xl text-zinc-400 font-normal">/mo</span>
-                </div>
-                <p className="text-zinc-500">or $421/yr — save 10% with annual billing</p>
-              </div>
-
-              <ul className="space-y-3 mb-8">
-                {includedFeatures.map((feat) => (
+              <p className="text-zinc-500 text-sm mb-6">For freelancers & small agencies</p>
+              <ul className="space-y-2 mb-8">
+                {[
+                  "5 team seats included",
+                  "Unlimited client portals",
+                  "Branded portals + custom domain",
+                  "Online invoicing (Stripe)",
+                  "Secure file sharing",
+                  "E-sign contracts",
+                  "Client messaging",
+                  "Onboarding wizard builder",
+                  "Priority email support",
+                ].map((feat) => (
                   <li key={feat} className="flex items-center gap-3 text-sm text-zinc-300">
                     <svg className="w-4 h-4 text-emerald-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
@@ -149,16 +153,83 @@ export default function PricingPage() {
                   </li>
                 ))}
               </ul>
-
-              <a
-                href="https://app.ziggynexus.com/signup"
-                className="block w-full text-center bg-emerald-500 hover:bg-emerald-400 text-black font-semibold px-6 py-4 rounded-xl transition-colors"
-              >
+              <a href="https://app.ziggynexus.com/signup" className="block w-full text-center border border-[#27272a] hover:bg-[#27272a] text-white font-semibold px-6 py-3 rounded-xl transition-colors">
                 Start Free Trial
               </a>
-              <p className="text-center text-zinc-600 text-sm mt-3">
-                14-day free trial &middot; No credit card required
-              </p>
+              <p className="text-center text-zinc-600 text-sm mt-3">or $421/yr — save 10%</p>
+            </div>
+
+            {/* Pro — highlighted */}
+            <div className="bg-[#18181b] border-2 border-emerald-500/50 rounded-2xl p-8 relative">
+              <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                <span className="bg-emerald-500 text-black text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+                  Most Popular
+                </span>
+              </div>
+              <div className="text-emerald-500 text-xs font-bold uppercase tracking-widest mb-2">Pro</div>
+              <div className="text-5xl font-bold mb-1">
+                $79
+                <span className="text-xl text-zinc-400 font-normal">/mo</span>
+              </div>
+              <p className="text-zinc-500 text-sm mb-6">For growing agencies</p>
+              <ul className="space-y-2 mb-8">
+                {[
+                  "15 team seats included",
+                  "Everything in Starter",
+                  "Advanced client reporting",
+                  "Automated payment reminders",
+                  "Team permissions & roles",
+                  "Reusable onboarding templates",
+                  "White-label email notifications",
+                  "API access",
+                  "Zapier integration",
+                ].map((feat) => (
+                  <li key={feat} className="flex items-center gap-3 text-sm text-zinc-300">
+                    <svg className="w-4 h-4 text-emerald-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                    </svg>
+                    {feat}
+                  </li>
+                ))}
+              </ul>
+              <a href="https://app.ziggynexus.com/signup" className="block w-full text-center bg-emerald-500 hover:bg-emerald-400 text-black font-semibold px-6 py-4 rounded-xl transition-colors">
+                Start Free Trial
+              </a>
+              <p className="text-center text-zinc-600 text-sm mt-3">or $854/yr — save 10%</p>
+            </div>
+
+            {/* Agency */}
+            <div className="bg-[#18181b] border border-[#27272a] rounded-2xl p-8">
+              <div className="text-emerald-500 text-xs font-bold uppercase tracking-widest mb-2">Agency</div>
+              <div className="text-5xl font-bold mb-1">
+                $149
+                <span className="text-xl text-zinc-400 font-normal">/mo</span>
+              </div>
+              <p className="text-zinc-500 text-sm mb-6">For large agencies & enterprises</p>
+              <ul className="space-y-2 mb-8">
+                {[
+                  "Unlimited team seats",
+                  "Everything in Pro",
+                  "Remove ZiggyNexus branding",
+                  "Custom login page",
+                  "Multiple workspaces",
+                  "Advanced audit logs",
+                  "Custom integrations",
+                  "Dedicated account manager",
+                  "SLA guarantee",
+                ].map((feat) => (
+                  <li key={feat} className="flex items-center gap-3 text-sm text-zinc-300">
+                    <svg className="w-4 h-4 text-emerald-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                    </svg>
+                    {feat}
+                  </li>
+                ))}
+              </ul>
+              <a href="https://app.ziggynexus.com/signup" className="block w-full text-center border border-[#27272a] hover:bg-[#27272a] text-white font-semibold px-6 py-4 rounded-xl transition-colors">
+                Start Free Trial
+              </a>
+              <p className="text-center text-zinc-600 text-sm mt-3">or $1,612/yr — save 10%</p>
             </div>
           </div>
         </div>
