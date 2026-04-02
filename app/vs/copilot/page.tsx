@@ -6,7 +6,7 @@ export const metadata: Metadata = {
     "Copilot charges $69/mo per seat. A 5-person team pays $345/mo. ZiggyNexus gives you 5 seats at $39/mo — same client portal experience, a fraction of the cost.",
 }
 
-const ACCENT = "#0ea5e9"
+const ACCENT = "#10b981"
 const ACCENT_BG = "rgba(14,165,233,0.1)"
 const ACCENT_BORDER = "rgba(14,165,233,0.25)"
 

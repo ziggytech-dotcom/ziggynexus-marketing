@@ -1,6 +1,6 @@
 import Script from "next/script"
 
-const ACCENT = "#0ea5e9"
+const ACCENT = "#10b981"
 const ACCENT_BG = "rgba(14,165,233,0.1)"
 const ACCENT_BORDER = "rgba(14,165,233,0.25)"
 const ACCENT_DIM = "rgba(14,165,233,0.03)"
