@@ -1,360 +1,130 @@
-import type { Metadata } from "next";
-import Link from "next/link";
+'use client'
+import { useState } from 'react'
+import Link from 'next/link'
+import { MarketingNav } from '@/app/components/Nav'
+import { MarketingFooter } from '@/app/components/Footer'
 
-export const metadata: Metadata = {
-  title: "Pricing — ZiggyNexus",
-  description:
-    "ZiggyNexus costs $39/mo. 5 team seats included, unlimited client portals, all features included. $12/seat/mo after 5 seats. No feature tiers, no surprises.",
-};
-
-const includedFeatures = [
-  "5 team seats included",
-  "+$12/seat/mo after 5 seats",
-  "Unlimited client portals",
-  "Branded white-label portals with custom domain",
-  "Online invoicing with Stripe payments",
-  "Automatic payment reminders",
-  "Secure encrypted file sharing",
-  "Upload requests from clients",
-  "E-sign contracts (legally binding)",
-  "Signature audit trail",
-  "Client messaging with rich text",
-  "Internal team notes",
-  "Onboarding wizard builder",
-  "Reusable onboarding templates",
-  "White-label email notifications",
-  "Unlimited file storage",
-  "Priority email support",
-  "API access",
-];
-
+const starterFeatures = [
+  `1 client portal`,
+  `Unlimited file sharing`,
+  `Basic invoicing`,
+  `Project dashboards`,
+  `Client messaging`,
+  `Email notifications`,
+  `Mobile-responsive`,
+  `Email support`,
+]
+const proFeatures = [
+  `Everything in Starter`,
+  `5 client portals`,
+  `E-signatures and approvals`,
+  `Recurring invoices`,
+  `Custom branding`,
+  `Team access controls`,
+  `Advanced analytics`,
+  `Priority support`,
+  `API access`,
+]
+const compRows = [
+  { feature: `Portals included`, starter: `1 portal`, pro: `5 portals` },
+  { feature: `Additional portals`, starter: `$12/portal/mo`, pro: `$10/portal/mo` },
+  { feature: `File sharing`, starter: true, pro: true },
+  { feature: `Invoicing`, starter: true, pro: true },
+  { feature: `Client messaging`, starter: true, pro: true },
+  { feature: `Project dashboards`, starter: true, pro: true },
+  { feature: `E-signatures`, starter: false, pro: true },
+  { feature: `Custom branding`, starter: false, pro: true },
+  { feature: `Team access controls`, starter: false, pro: true },
+  { feature: `API access`, starter: false, pro: true },
+  { feature: `Priority support`, starter: false, pro: true },
+]
 const faqs = [
-  {
-    question: "Is there a free trial?",
-    answer:
-      "Yes. You get a full 14-day free trial with access to all features. No credit card required to start. At the end of the trial, you can subscribe for $39/mo or cancel — no pressure.",
-  },
-  {
-    question: "How many clients can I have?",
-    answer:
-      "Unlimited. We don't charge per client or per portal. You can have 5 clients or 500 clients — the price stays $39/mo.",
-  },
-  {
-    question: "Is there a per-user or per-seat fee for my team?",
-    answer:
-      "Your $39/mo subscription includes 5 team seats. Additional seats are $12/seat/mo. For most small businesses and agencies, 5 seats covers the whole team — and you still pay a fraction of what Copilot charges for a single seat ($69/mo).",
-  },
-  {
-    question: "What payment methods do you accept?",
-    answer:
-      "We accept all major credit cards (Visa, Mastercard, Amex) via Stripe. Annual billing is available at 10% off ($421/yr).",
-  },
-  {
-    question: "Can I cancel anytime?",
-    answer:
-      "Absolutely. Month-to-month with no long-term commitment. Cancel from your dashboard and your subscription ends at the next billing cycle — no penalties.",
-  },
-  {
-    question: "What happens to my data if I cancel?",
-    answer:
-      "You have 30 days after cancellation to export all your data — invoices, files, messages, and signed contracts. After that, data is permanently deleted.",
-  },
-  {
-    question: "Do you charge transaction fees on invoices?",
-    answer:
-      "ZiggyNexus charges no platform transaction fee. Standard Stripe processing fees apply (2.9% + $0.30 for cards, 0.8% capped at $5 for ACH). You keep the rest.",
-  },
-  {
-    question: "Is there an annual plan?",
-    answer:
-      "Yes — pay annually and save 10%, bringing your effective cost to $35/mo ($421/yr). Switch to annual anytime from your billing settings.",
-  },
-];
-
-const comparisonRows = [
-  { feature: "Price", ziggynexus: "$39/mo", copilot: "$69/mo", suitedash: "$99/mo" },
-  { feature: "Branded client portals", ziggynexus: true, copilot: true, suitedash: true },
-  { feature: "Unlimited portals", ziggynexus: true, copilot: false, suitedash: false },
-  { feature: "Custom domain", ziggynexus: true, copilot: true, suitedash: true },
-  { feature: "Online invoicing", ziggynexus: true, copilot: true, suitedash: true },
-  { feature: "E-sign contracts", ziggynexus: true, copilot: true, suitedash: true },
-  { feature: "Secure file sharing", ziggynexus: true, copilot: true, suitedash: true },
-  { feature: "Client messaging", ziggynexus: true, copilot: true, suitedash: true },
-  { feature: "Onboarding wizard", ziggynexus: true, copilot: false, suitedash: true },
-  { feature: "5 seats included", ziggynexus: true, copilot: false, suitedash: false },
-  { feature: "Modern, clean UI", ziggynexus: true, copilot: true, suitedash: false },
-  { feature: "Setup time", ziggynexus: "< 5 min", copilot: "~30 min", suitedash: "Hours" },
-  { feature: "API access", ziggynexus: true, copilot: true, suitedash: true },
-  { feature: "Priority support", ziggynexus: true, copilot: false, suitedash: true },
-];
-
-function CheckIcon({ green = true }: { green?: boolean }) {
-  if (green) {
-    return (
-      <svg className="w-5 h-5 text-emerald-500 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
-      </svg>
-    );
-  }
-  return (
-    <svg className="w-5 h-5 text-zinc-700 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-    </svg>
-  );
-}
+  { q: `Do clients need to create an account?`, a: `No. Clients access their portal via a secure link you share. They can view files, send messages, and sign documents without creating an account.` },
+  { q: `How many portals can I create?`, a: `Starter includes 1 portal at $25/mo. Pro includes 5 portals at $39/mo. Add more at $12/portal/mo (Starter) or $10/portal/mo (Pro).` },
+  { q: `Can I use my own branding?`, a: `Pro plan users can remove the ZiggyNexus logo and replace it with their own logo, brand colors, and custom portal domain.` },
+  { q: `Is e-signature legally binding?`, a: `Yes. ZiggyNexus e-signatures comply with ESIGN and UETA in the US, and eIDAS in Europe. Every signature includes a full audit trail.` },
+]
 
 export default function PricingPage() {
+  const [openFaq, setOpenFaq] = useState<number | null>(null)
   return (
-    <div className="bg-[#0f0a0a]">
-      {/* Hero */}
-      <section className="py-24 relative overflow-hidden">
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[400px] rounded-full bg-emerald-500/5 blur-3xl" />
-        </div>
-        <div className="max-w-6xl mx-auto px-6 text-center relative">
-          <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-4">
-            Simple, honest pricing.
-          </h1>
-          <p className="text-xl text-zinc-400 max-w-xl mx-auto">
-            One plan. All features. Unlimited client portals. No surprises.
-          </p>
+    <div className="bg-[#0a0a0a] min-h-screen" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+      <MarketingNav />
+      <section className="pt-20 pb-16 px-4 text-center">
+        <div className="max-w-4xl mx-auto">
+          <p className="text-xs font-semibold uppercase tracking-widest text-[#10b981] mb-4">Pricing</p>
+          <h1 className="text-5xl md:text-7xl font-bold text-white mb-6">Simple, honest pricing</h1>
+          <p className="text-xl text-[#b3b3b3] max-w-2xl mx-auto">No seat traps. No hidden fees. Just a price that works.</p>
         </div>
       </section>
-
-      {/* Pricing cards */}
-      <section className="pb-24">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {/* Starter */}
-            <div className="bg-[#18181b] border border-[#27272a] rounded-2xl p-8">
-              <div className="text-emerald-500 text-xs font-bold uppercase tracking-widest mb-2">Starter</div>
-              <div className="text-5xl font-bold mb-1">
-                $39
-                <span className="text-xl text-zinc-400 font-normal">/mo</span>
-              </div>
-              <p className="text-zinc-500 text-sm mb-6">For freelancers & small agencies</p>
-              <ul className="space-y-2 mb-8">
-                {[
-                  "5 team seats included",
-                  "Unlimited client portals",
-                  "Branded portals + custom domain",
-                  "Online invoicing (Stripe)",
-                  "Secure file sharing",
-                  "E-sign contracts",
-                  "Client messaging",
-                  "Onboarding wizard builder",
-                  "Priority email support",
-                ].map((feat) => (
-                  <li key={feat} className="flex items-center gap-3 text-sm text-zinc-300">
-                    <svg className="w-4 h-4 text-emerald-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
-                    </svg>
-                    {feat}
-                  </li>
-                ))}
-              </ul>
-              <a href="https://app.ziggynexus.com/signup" className="block w-full text-center border border-[#27272a] hover:bg-[#27272a] text-white font-semibold px-6 py-3 rounded-xl transition-colors">
-                Start Free Trial
-              </a>
-              <p className="text-center text-zinc-600 text-sm mt-3">or $421/yr — save 10%</p>
+      <section className="py-12 px-4">
+        <div className="max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
+            <div className="bg-[#111111] border border-[#1f1f1f] rounded-2xl p-8">
+              <p className="text-sm font-semibold text-[#b3b3b3] uppercase tracking-wider mb-2">Starter</p>
+              <div className="flex items-end gap-1 mb-1"><span className="text-6xl font-bold text-white">$25</span><span className="text-[#b3b3b3] mb-2 text-lg">/mo</span></div>
+              <p className="text-sm text-[#b3b3b3] mb-6">1 seat · +$12/additional seat</p>
+              <Link href="https://app.ziggynexus.com/signup" className="block w-full text-center px-6 py-3.5 bg-[#10b981]/10 border border-[#10b981]/30 text-[#10b981] rounded-xl font-semibold hover:bg-[#10b981]/20 transition-all mb-6">Start free trial</Link>
+              <ul className="space-y-3">{starterFeatures.map((f) => <li key={f} className="flex items-start gap-3 text-[#b3b3b3] text-sm"><svg className="w-4 h-4 text-[#10b981] mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" /></svg>{f}</li>)}</ul>
             </div>
-
-            {/* Pro — highlighted */}
-            <div className="bg-[#18181b] border-2 border-emerald-500/50 rounded-2xl p-8 relative">
-              <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                <span className="bg-emerald-500 text-black text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
-                  Most Popular
-                </span>
-              </div>
-              <div className="text-emerald-500 text-xs font-bold uppercase tracking-widest mb-2">Pro</div>
-              <div className="text-5xl font-bold mb-1">
-                $79
-                <span className="text-xl text-zinc-400 font-normal">/mo</span>
-              </div>
-              <p className="text-zinc-500 text-sm mb-6">For growing agencies</p>
-              <ul className="space-y-2 mb-8">
-                {[
-                  "15 team seats included",
-                  "Everything in Starter",
-                  "Advanced client reporting",
-                  "Automated payment reminders",
-                  "Team permissions & roles",
-                  "Reusable onboarding templates",
-                  "White-label email notifications",
-                  "API access",
-                  "Zapier integration",
-                ].map((feat) => (
-                  <li key={feat} className="flex items-center gap-3 text-sm text-zinc-300">
-                    <svg className="w-4 h-4 text-emerald-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
-                    </svg>
-                    {feat}
-                  </li>
-                ))}
-              </ul>
-              <a href="https://app.ziggynexus.com/signup" className="block w-full text-center bg-emerald-500 hover:bg-emerald-400 text-black font-semibold px-6 py-4 rounded-xl transition-colors">
-                Start Free Trial
-              </a>
-              <p className="text-center text-zinc-600 text-sm mt-3">or $854/yr — save 10%</p>
-            </div>
-
-            {/* Agency */}
-            <div className="bg-[#18181b] border border-[#27272a] rounded-2xl p-8">
-              <div className="text-emerald-500 text-xs font-bold uppercase tracking-widest mb-2">Agency</div>
-              <div className="text-5xl font-bold mb-1">
-                $149
-                <span className="text-xl text-zinc-400 font-normal">/mo</span>
-              </div>
-              <p className="text-zinc-500 text-sm mb-6">For large agencies & enterprises</p>
-              <ul className="space-y-2 mb-8">
-                {[
-                  "Unlimited team seats",
-                  "Everything in Pro",
-                  "Remove ZiggyNexus branding",
-                  "Custom login page",
-                  "Multiple workspaces",
-                  "Advanced audit logs",
-                  "Custom integrations",
-                  "Dedicated account manager",
-                  "SLA guarantee",
-                ].map((feat) => (
-                  <li key={feat} className="flex items-center gap-3 text-sm text-zinc-300">
-                    <svg className="w-4 h-4 text-emerald-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
-                    </svg>
-                    {feat}
-                  </li>
-                ))}
-              </ul>
-              <a href="https://app.ziggynexus.com/signup" className="block w-full text-center border border-[#27272a] hover:bg-[#27272a] text-white font-semibold px-6 py-4 rounded-xl transition-colors">
-                Start Free Trial
-              </a>
-              <p className="text-center text-zinc-600 text-sm mt-3">or $1,612/yr — save 10%</p>
+            <div className="bg-[#111111] border-2 border-[#10b981]/40 rounded-2xl p-8 relative">
+              <div className="absolute -top-3 left-6"><span className="px-3 py-1 bg-[#10b981] text-white text-xs font-bold rounded-full uppercase">Most Popular</span></div>
+              <p className="text-sm font-semibold text-[#b3b3b3] uppercase tracking-wider mb-2">Pro</p>
+              <div className="flex items-end gap-1 mb-1"><span className="text-6xl font-bold text-white">$39</span><span className="text-[#b3b3b3] mb-2 text-lg">/mo</span></div>
+              <p className="text-sm text-[#b3b3b3] mb-6">5 seats included · +$10/additional seat</p>
+              <Link href="https://app.ziggynexus.com/signup" className="block w-full text-center px-6 py-3.5 bg-[#10b981] text-white rounded-xl font-semibold hover:opacity-90 transition-all mb-6">Start free trial</Link>
+              <ul className="space-y-3">{proFeatures.map((f) => <li key={f} className="flex items-start gap-3 text-[#b3b3b3] text-sm"><svg className="w-4 h-4 text-[#10b981] mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" /></svg>{f}</li>)}</ul>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* Comparison table */}
-      <section className="py-24 border-t border-[#27272a]">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-4">How we compare</h2>
-            <p className="text-zinc-400">
-              ZiggyNexus at $39/mo vs the competition
-            </p>
+          <h2 className="text-2xl font-bold text-white mb-6 text-center">Feature comparison</h2>
+          <div className="bg-[#111111] border border-[#1f1f1f] rounded-2xl overflow-hidden mb-16">
+            <div className="grid grid-cols-3 bg-[#1a1a1a] border-b border-[#1f1f1f]">
+              <div className="p-4 text-sm font-semibold text-[#b3b3b3]">Feature</div>
+              <div className="p-4 text-sm font-semibold text-white text-center">Starter</div>
+              <div className="p-4 text-sm font-semibold text-[#10b981] text-center">Pro</div>
+            </div>
+            {compRows.map((r) => (
+              <div key={r.feature} className="grid grid-cols-3 border-b border-[#1f1f1f] last:border-0 hover:bg-[#151515]">
+                <div className="p-4 text-sm text-[#b3b3b3]">{r.feature}</div>
+                <div className="p-4 text-center">
+                  {typeof r.starter === 'boolean' ? (r.starter ? <svg className="w-5 h-5 text-[#10b981] mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" /></svg> : <svg className="w-5 h-5 text-[#555] mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>) : <span className="text-sm text-[#b3b3b3]">{r.starter}</span>}
+                </div>
+                <div className="p-4 text-center">
+                  {typeof r.pro === 'boolean' ? (r.pro ? <svg className="w-5 h-5 text-[#10b981] mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" /></svg> : <svg className="w-5 h-5 text-[#555] mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>) : <span className="text-sm text-[#10b981] font-medium">{r.pro}</span>}
+                </div>
+              </div>
+            ))}
           </div>
-
-          <div className="overflow-x-auto">
-            <table className="w-full border-collapse">
-              <thead>
-                <tr>
-                  <th className="text-left py-4 px-6 text-zinc-500 font-medium text-sm">Feature</th>
-                  <th className="py-4 px-6 text-center">
-                    <div className="font-bold text-white">
-                      <span style={{ color: "#ff1744" }}>Ziggy</span>Nexus
-                    </div>
-                    <div className="text-emerald-500 text-sm font-semibold">$39/mo</div>
-                  </th>
-                  <th className="py-4 px-6 text-center">
-                    <div className="font-bold text-zinc-400">Copilot</div>
-                    <div className="text-zinc-600 text-sm">$69/mo</div>
-                  </th>
-                  <th className="py-4 px-6 text-center">
-                    <div className="font-bold text-zinc-400">SuiteDash</div>
-                    <div className="text-zinc-600 text-sm">$99/mo</div>
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {comparisonRows.map((row, i) => (
-                  <tr
-                    key={row.feature}
-                    className={`border-t border-[#27272a] ${i % 2 === 0 ? "bg-transparent" : "bg-[#18181b]/40"}`}
-                  >
-                    <td className="py-4 px-6 text-sm text-zinc-300">{row.feature}</td>
-                    <td className="py-4 px-6 text-center">
-                      {typeof row.ziggynexus === "boolean" ? (
-                        <CheckIcon green={row.ziggynexus} />
-                      ) : (
-                        <span className="text-emerald-500 text-sm font-semibold">{row.ziggynexus}</span>
-                      )}
-                    </td>
-                    <td className="py-4 px-6 text-center">
-                      {typeof row.copilot === "boolean" ? (
-                        <CheckIcon green={row.copilot} />
-                      ) : (
-                        <span className="text-zinc-400 text-sm">{row.copilot}</span>
-                      )}
-                    </td>
-                    <td className="py-4 px-6 text-center">
-                      {typeof row.suitedash === "boolean" ? (
-                        <CheckIcon green={row.suitedash} />
-                      ) : (
-                        <span className="text-zinc-400 text-sm">{row.suitedash}</span>
-                      )}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          <div className="bg-[#111111] border border-[#1f1f1f] rounded-2xl p-6 mb-8 text-center">
+            <p className="text-[#b3b3b3] text-sm mb-2">vs the competition</p>
+            <div className="flex flex-wrap justify-center gap-8">
+              <div><p className="text-[#b3b3b3] text-sm">Copilot</p><p className="text-2xl font-bold text-white">$69<span className="text-base text-[#b3b3b3]">/mo</span></p></div>
+              <div><p className="text-[#10b981] text-sm font-medium">ZiggyNexus</p><p className="text-2xl font-bold text-[#10b981]">$25<span className="text-base text-[#b3b3b3]">/mo</span></p></div>
+              <div><p className="text-[#b3b3b3] text-sm">HoneyBook</p><p className="text-2xl font-bold text-white">$79<span className="text-base text-[#b3b3b3]">/mo</span></p></div>
+            </div>
           </div>
-
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mt-10">
-            <Link
-              href="/vs/copilot"
-              className="border border-[#27272a] hover:border-emerald-500 text-white px-6 py-3 rounded-xl text-sm transition-colors text-center"
-            >
-              Full ZiggyNexus vs Copilot comparison →
-            </Link>
-            <Link
-              href="/vs/suitedash"
-              className="border border-[#27272a] hover:border-emerald-500 text-white px-6 py-3 rounded-xl text-sm transition-colors text-center"
-            >
-              Full ZiggyNexus vs SuiteDash comparison →
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ */}
-      <section className="py-24 border-t border-[#27272a]">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-4">Frequently asked questions</h2>
-          </div>
-          <div className="max-w-3xl mx-auto space-y-4">
-            {faqs.map((faq) => (
-              <div
-                key={faq.question}
-                className="bg-[#18181b] border border-[#27272a] rounded-2xl p-6"
-              >
-                <h3 className="font-semibold mb-3">{faq.question}</h3>
-                <p className="text-zinc-400 text-sm leading-relaxed">{faq.answer}</p>
+          <div className="max-w-2xl mx-auto space-y-3">
+            <h2 className="text-2xl font-bold text-white mb-6 text-center">Pricing FAQ</h2>
+            {faqs.map((faq, i) => (
+              <div key={i} className="bg-[#111111] border border-[#1f1f1f] rounded-2xl overflow-hidden">
+                <button className="w-full flex items-center justify-between p-6 text-left" onClick={() => setOpenFaq(openFaq === i ? null : i)}>
+                  <span className="text-white font-semibold pr-4">{faq.q}</span>
+                  <svg className={`w-5 h-5 text-[#10b981] flex-shrink-0 transition-transform ${openFaq === i ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+                </button>
+                {openFaq === i && <div className="px-6 pb-6"><p className="text-[#b3b3b3] leading-relaxed">{faq.a}</p></div>}
               </div>
             ))}
           </div>
         </div>
       </section>
-
-      {/* CTA */}
-      <section className="py-24 border-t border-[#27272a]">
-        <div className="max-w-6xl mx-auto px-6 text-center">
-          <h2 className="text-4xl font-bold mb-4">Ready to get started?</h2>
-          <p className="text-zinc-400 mb-8">
-            Join 500+ agencies and consultants for just $39/mo.
-          </p>
-          <a
-            href="https://app.ziggynexus.com/signup"
-            className="bg-emerald-500 hover:bg-emerald-400 text-black font-semibold px-8 py-4 rounded-xl text-base transition-colors inline-flex items-center gap-2"
-          >
-            Start Your Free Trial
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-            </svg>
-          </a>
+      <section className="py-24 px-4 text-center">
+        <div className="max-w-2xl mx-auto">
+          <h2 className="text-4xl font-bold text-white mb-6">Start your free trial today</h2>
+          <p className="text-xl text-[#b3b3b3] mb-8">14 days free. No credit card required.</p>
+          <Link href="https://app.ziggynexus.com/signup" className="inline-flex items-center gap-2 px-10 py-5 bg-[#10b981] text-white rounded-xl font-bold text-xl hover:opacity-90 transition-all">Start Free Trial</Link>
         </div>
       </section>
+      <MarketingFooter />
     </div>
-  );
+  )
 }

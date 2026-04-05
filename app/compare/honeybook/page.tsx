@@ -16,7 +16,7 @@ const rows = [
   { feature: `Priority support`, ziggy: true },
 ]
 const reasons = [
-  `Save money every month — Copilot charges $69/mo. ZiggyNexus starts at $25/mo.`,
+  `Save money every month — HoneyBook charges $79/mo. ZiggyNexus starts at $25/mo.`,
   `ZiggyNexus is built for how small businesses actually operate — not enterprise workflows.`,
   `Get up and running in under an hour. No lengthy onboarding required.`,
   `ZiggyNexus integrates natively with all 9 other ZiggyTech apps. No API setup needed.`,
@@ -29,9 +29,9 @@ export default function ComparePage() {
       <section className="relative overflow-hidden pt-20 pb-20 px-4">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-[#10b981]/8 rounded-full blur-3xl pointer-events-none" />
         <div className="max-w-4xl mx-auto text-center relative">
-          <div className="inline-flex items-center gap-2 bg-[#1a1a1a] border border-[#2d2d2d] rounded-full px-4 py-1.5 text-sm text-[#b3b3b3] mb-8">ZiggyNexus vs Copilot</div>
+          <div className="inline-flex items-center gap-2 bg-[#1a1a1a] border border-[#2d2d2d] rounded-full px-4 py-1.5 text-sm text-[#b3b3b3] mb-8">ZiggyNexus vs HoneyBook</div>
           <h1 className="text-5xl md:text-7xl font-bold text-white mb-6">
-            <span className="text-[#10b981]">ZiggyNexus</span> vs <span className="text-[#b3b3b3]">Copilot</span>
+            <span className="text-[#10b981]">ZiggyNexus</span> vs <span className="text-[#b3b3b3]">HoneyBook</span>
           </h1>
           <p className="text-xl text-[#b3b3b3] max-w-2xl mx-auto mb-10">The honest comparison. Same core features. Better pricing for small teams.</p>
           <Link href="https://app.ziggynexus.com/signup" className="bg-[#10b981] text-white rounded-xl px-8 py-4 font-semibold text-lg hover:opacity-90 inline-block">Try ZiggyNexus Free</Link>
@@ -41,7 +41,7 @@ export default function ComparePage() {
         <div className="max-w-4xl mx-auto">
           <h2 className="text-2xl font-bold text-white mb-6">The verdict</h2>
           <div className="bg-[#1a1a1a] border border-[#2d2d2d] rounded-xl p-6">
-            <p className="text-[#b3b3b3] leading-relaxed">Copilot is a solid client portal — but at $69/mo base, it costs nearly 3x what ZiggyNexus Starter costs. ZiggyNexus gives you the same core portal, file sharing, messaging, and invoicing for $25/mo.</p>
+            <p className="text-[#b3b3b3] leading-relaxed">HoneyBook is built for solo freelancers and photographers. At $19-$79/mo, pricing looks similar — but HoneyBook's project management features are more limited for agencies. ZiggyNexus is purpose-built for agency workflows.</p>
           </div>
         </div>
       </section>
@@ -55,8 +55,8 @@ export default function ComparePage() {
               <p className="text-sm text-[#10b981] mt-2">Full ZiggyTech Suite integration</p>
             </div>
             <div className="bg-[#111111] border border-[#1f1f1f] rounded-2xl p-8 text-center">
-              <p className="text-xl font-bold text-white mb-2">Copilot</p>
-              <p className="text-5xl font-bold text-white mb-1">$69<span className="text-xl text-[#b3b3b3]">/mo</span></p>
+              <p className="text-xl font-bold text-white mb-2">HoneyBook</p>
+              <p className="text-5xl font-bold text-white mb-1">$79<span className="text-xl text-[#b3b3b3]">/mo</span></p>
               <p className="text-sm text-[#b3b3b3] mt-2">No suite integration</p>
             </div>
           </div>
@@ -68,7 +68,7 @@ export default function ComparePage() {
             <div className="grid grid-cols-3 bg-[#1a1a1a] border-b border-[#1f1f1f]">
               <div className="p-4 text-sm font-semibold text-[#b3b3b3]">Feature</div>
               <div className="p-4 text-sm font-semibold text-[#10b981] text-center">ZiggyNexus</div>
-              <div className="p-4 text-sm font-semibold text-[#b3b3b3] text-center">Copilot</div>
+              <div className="p-4 text-sm font-semibold text-[#b3b3b3] text-center">HoneyBook</div>
             </div>
             {rows.map((r) => (
               <div key={r.feature} className="grid grid-cols-3 border-b border-[#1f1f1f] last:border-0">
