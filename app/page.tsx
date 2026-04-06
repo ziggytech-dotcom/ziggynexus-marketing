@@ -13,7 +13,7 @@ const features = [
   { title: `E-Signatures and Approvals`, desc: `Collect legally binding signatures on contracts. Send approval requests for deliverables.` },
 ]
 const heroFacts = [
-  '$25/mo — fraction of Copilot's price',
+  '$25/mo — fraction of Copilot’s price',
   'Set up in under an hour',
   '10-app suite available',
   'Support from the team that built it',
