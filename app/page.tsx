@@ -120,7 +120,7 @@ export default function HomePage() {
           <div className="text-center mb-16">
             <p className="text-xs font-semibold uppercase tracking-widest text-[#10b981] mb-3">Features</p>
             <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">Everything you need</h2>
-            <p className="text-lg text-[#b3b3b3] max-w-2xl mx-auto">The tools that actually move your business forward.</p>
+            <p className="text-lg text-[#b3b3b3] max-w-2xl mx-auto text-center">The tools that actually move your business forward.</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {features.map((f) => (
@@ -165,7 +165,7 @@ export default function HomePage() {
         <div className="max-w-4xl mx-auto text-center">
           <p className="text-xs font-semibold uppercase tracking-widest text-[#10b981] mb-4">Pricing</p>
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">Simple, honest pricing</h2>
-          <p className="text-lg text-[#b3b3b3] mb-12 max-w-2xl mx-auto">No seat traps. No hidden fees. No contact sales.</p>
+          <p className="text-lg text-[#b3b3b3] mb-12 max-w-2xl mx-auto text-center">No seat traps. No hidden fees. No contact sales.</p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto mb-8">
             <div className="bg-[#111111] border border-[#1f1f1f] rounded-2xl p-8 text-left">
               <p className="text-sm font-semibold text-[#b3b3b3] uppercase tracking-wider mb-2">Starter</p>
