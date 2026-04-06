@@ -5,12 +5,54 @@ import { MarketingNav } from '@/app/components/Nav'
 import { MarketingFooter } from '@/app/components/Footer'
 
 const features = [
-  { title: `Client Portal`, desc: `Give every client their own branded portal with project dashboards, file sharing, messaging, and invoicing.` },
-  { title: `File Sharing`, desc: `Securely share files with clients. Track approvals, versions, and download history.` },
-  { title: `Invoicing`, desc: `Send branded invoices from the portal. Clients pay online via Stripe. Track outstanding balances automatically.` },
-  { title: `Project Dashboards`, desc: `Show clients exactly where their project stands with milestones, tasks, and timelines.` },
-  { title: `Messaging`, desc: `Built-in client messaging keeps all communication in one place — threaded by project.` },
-  { title: `E-Signatures and Approvals`, desc: `Collect legally binding signatures on contracts. Send approval requests for deliverables.` },
+  {
+    icon: (
+      <svg className="w-6 h-6 text-[#10b981]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+      </svg>
+    ),
+    title: `Client Portal`, desc: `Give every client their own branded portal with project dashboards, file sharing, messaging, and invoicing.`
+  },
+  {
+    icon: (
+      <svg className="w-6 h-6 text-[#10b981]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+      </svg>
+    ),
+    title: `File Sharing`, desc: `Securely share files with clients. Track approvals, versions, and download history.`
+  },
+  {
+    icon: (
+      <svg className="w-6 h-6 text-[#10b981]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 14l6-6m-5.5.5h.01m4.99 5h.01M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+      </svg>
+    ),
+    title: `Invoicing`, desc: `Send branded invoices from the portal. Clients pay online via Stripe. Track outstanding balances automatically.`
+  },
+  {
+    icon: (
+      <svg className="w-6 h-6 text-[#10b981]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+      </svg>
+    ),
+    title: `Project Dashboards`, desc: `Show clients exactly where their project stands with milestones, tasks, and timelines.`
+  },
+  {
+    icon: (
+      <svg className="w-6 h-6 text-[#10b981]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+      </svg>
+    ),
+    title: `Messaging`, desc: `Built-in client messaging keeps all communication in one place — threaded by project.`
+  },
+  {
+    icon: (
+      <svg className="w-6 h-6 text-[#10b981]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+      </svg>
+    ),
+    title: `E-Signatures and Approvals`, desc: `Collect legally binding signatures on contracts. Send approval requests for deliverables.`
+  },
 ]
 const heroFacts = [
   '$25/mo — fraction of Copilot’s price',
@@ -82,7 +124,10 @@ export default function HomePage() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {features.map((f) => (
-              <div key={f.title} className="bg-[#111111] border border-[#1f1f1f] rounded-2xl p-6 md:p-8 hover:border-[#10b981]/30 transition-all">
+              <div key={f.title} className="bg-[#111111] border border-[#1f1f1f] rounded-2xl p-6 md:p-8 hover:border-[#10b981]/30 hover:shadow-[0_0_30px_rgba(16,185,129,0.08)] transition-all group">
+                <div className="w-12 h-12 rounded-xl bg-[#10b981]/10 border border-[#10b981]/20 flex items-center justify-center mb-5 group-hover:bg-[#10b981]/20 transition-colors">
+                  {f.icon}
+                </div>
                 <h3 className="text-xl font-semibold text-white mb-3">{f.title}</h3>
                 <p className="text-[#b3b3b3] leading-relaxed">{f.desc}</p>
               </div>
