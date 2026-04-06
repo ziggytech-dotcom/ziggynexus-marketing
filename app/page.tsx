@@ -80,7 +80,7 @@ export default function HomePage() {
     <div className="bg-[#0a0a0a] min-h-screen" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
       <MarketingNav />
 
-      <section className="relative overflow-hidden pt-32 pb-24 px-4">
+      <section className="relative overflow-hidden pt-32 pb-24 px-4 bg-[#0a0a0a]">
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[600px] bg-[#10b981]/12 rounded-full blur-3xl" />
           <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,0.1) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.1) 1px,transparent 1px)', backgroundSize: '64px 64px' }} />
