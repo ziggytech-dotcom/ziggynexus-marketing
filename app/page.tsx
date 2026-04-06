@@ -48,8 +48,7 @@ export default function HomePage() {
             ZiggyNexus — Client Portal for local business
           </div>
           <h1 className="text-5xl md:text-7xl font-bold text-white leading-tight tracking-tight mb-6">
-            Client portal your clients will actually use.{' '}
-            {tagline.split('. ').length > 1 && <span className="text-[#10b981]"></span>}
+            Client portal your clients will actually use
           </h1>
           <p className="text-xl md:text-2xl text-[#b3b3b3] max-w-3xl mx-auto leading-relaxed mb-10">
             We built ZiggyNexus because our clients kept asking for updates in different places. One portal. Everything in one place. Built for how agencies and freelancers actually work.
